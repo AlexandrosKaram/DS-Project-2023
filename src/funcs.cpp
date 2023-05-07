@@ -18,7 +18,7 @@ void formatFile(std::string inputFilename, std::string outputFilename) {
         while (std::getline(inputFile, line)) { // Loop through each line of the file
             for (char c : line) { // Loop through each character of the line
                 if (!std::ispunct(c)) { // If the character is not punctuation, convert it to lowercase and print it
-                    outputFile << std:: tolower(c);
+                    outputFile << (char) std:: tolower(c);
                 }
             }
             outputFile << std::endl;
