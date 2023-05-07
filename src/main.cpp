@@ -7,7 +7,7 @@
 #include "../header/SortedArray.h"
 
 int main() {
-	formatFile("../small-file.txt", "../output.txt"); //Custom function that formats the file
+	formatFile("small-file.txt", "output.txt"); //Custom function that formats the file
 
 	return 0;
 }
