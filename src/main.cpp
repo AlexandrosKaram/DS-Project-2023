@@ -5,6 +5,7 @@
 #include "../header/BinaryTree.h"
 #include "../header/HashTable.h"
 #include "../header/SortedArray.h"
+#include <time.h>
 
 //Include libraries
 #include <iostream>
