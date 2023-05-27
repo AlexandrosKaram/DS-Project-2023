@@ -1,3 +1,5 @@
 small-file.txt
 output.txt
 src/main.exe
+src/test.exe
+.vscode/
