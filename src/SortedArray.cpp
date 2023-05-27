@@ -3,6 +3,9 @@
 #include "../header/Array.h"
 // include libraries
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <time.h>
 
 SortedArray:: SortedArray() : Array() {};   // default constructor
 
@@ -70,3 +73,37 @@ void SortedArray:: quicksort(pair* data, int low, int high) {
 void SortedArray:: quicksortArray() {
     quicksort(data, 0, rows - 1);
 }
+
+void SortedArray:: createPairs(std::string fileName, int random) {
+    clock_t start = clock();   // track start time
+
+    std::ifstream file;
+	file.open(fileName);
+
+	std::string word;
+	int N = this->getRows();   // number of rows
+	file.seekg(N,std::ios::beg);   // start from a random (N) position indicator
+	file >> word;	// read word from the file
+	this->setWord1(0, word);   // include first word
+	for (int i=0 ; i<N-1 ; i++) {
+		file >> word;
+		this->setWord2(i, word);   // use word as second in this pair and first in next pair
+		this->setWord1(i+1, word); 
+	}
+	file >> word;
+	this->setWord2(N-1, word);   // include last word
+    this->quicksortArray();
+
+	// for testing reasons only - print data
+	for (int i=0 ; i<this->getRows() ; i++) {
+		this->setAppearances(i, this->timesExists(i));
+		std::cout << "[" << this->getWord1(i) << ", " << this->getWord2(i) << ", " << this->getAppearances(i) << "]";
+		std::cout << std::endl;
+	}
+		
+	file.close();
+
+    clock_t end = clock();   // track end time
+    this->time = double(end - start)/CLOCKS_PER_SEC;   // calculate elapsed time
+    std::cout << "Time to create pairs: " << this->time << " seconds." << std::endl;   // testing reasons only
+};

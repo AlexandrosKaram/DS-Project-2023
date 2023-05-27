@@ -17,7 +17,9 @@ class SortedArray: public Array {   // derived class of Array
     SortedArray();
     SortedArray(int rows);
     ~SortedArray();
+    
     // methods
+    void createPairs(std::string fileName, int random);
     void quicksortArray();  // quick sort the array
     void swapPairs(pair& a, pair& b);   // swaps two pairs
     virtual int timesExists(int i);   // returns number of appearances
