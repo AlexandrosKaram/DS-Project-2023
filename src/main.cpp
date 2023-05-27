@@ -26,7 +26,7 @@ int main() {
 
 	std::string word;
 	int N = test.getRows();   // number of rows
-
+	file.seekg(N,std::ios::beg);   // start from a random (N) position indicator
 	file >> word;	// read word from the file
 	test.setWord1(0, word);   // include first word
 	for (int i=0 ; i<N-1 ; i++) {
