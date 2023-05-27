@@ -1,4 +1,6 @@
-// includes
+# pragma once
+
+// include libraries
 #include <iostream>
 
 typedef struct Pair {

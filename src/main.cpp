@@ -39,6 +39,7 @@ int main() {
 
 	// for testing reasons only - print data
 	for (int i=0 ; i<test.getRows() ; i++) {
+		test.setAppearances(i, test.timesExists(i));
 		std::cout << "[" << test.getWord1(i) << ", " << test.getWord2(i) << ", " << test.getAppearances(i) << "]";
 		std::cout << std::endl;
 	}

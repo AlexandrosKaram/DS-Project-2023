@@ -1,64 +1,58 @@
+// include header files
 #include "../header/Array.h"
-
+// include libraries
 #include <string>
 
 Array::Array() {};   // empty constructor
 
-Array::Array(int rows) {
+Array::Array(int rows) {   // constructor that creates an array with specific number of rows
     this->rows = rows; 
-    data = new std::string*[rows];   // allocate memory for the rows
-    for (int i = 0;i < rows;i++) {
-        data[i] = new std::string[3];   // allocate memory for the three columns of each row
-        data[i][2] = '0';   // initialize appearances to zero.
+    data = new pair[rows];   // allocate memory for the array
+    for (int i=0 ; i < rows ; i++) {
+        data[i].apps = 0;   // initialize appearances as 0
     }
 }
 
-Array::~Array() {
-    for (int i = 0;i < rows;i++) {
-        delete[] data[3];   // deallocate memory for the three columns of each row
-    }
-    delete[] data;   // deallocate memory for the rows
+Array::~Array() {   // destructor
+    delete[] data;   // deallocate memory
 }
 
-void Array::setWord1(int i, std::string word1) {
-    data[i][0] = word1;
+void Array::setWord1(int i, std::string word1) {   // setter for first word
+    data[i].word1 = word1;   
 }
 
-void Array::setWord2(int i, std::string word2) {
-    data[i][1] = word2;
+void Array::setWord2(int i, std::string word2) {   // setter for second word
+    data[i].word2 = word2;   
+}
+ 
+void Array::setAppearances(int i, int n) {   // setter for appearances
+    data[i].apps = n; 
 }
 
-void Array::setAppearances(int i, int n) {
-    data[i][2] = std::to_string(n);   // int to string
+std::string Array::getWord1(int i) {   // getter for first word
+    return data[i].word1;
 }
 
-std::string Array::getWord1(int i) {
-    return data[i][0];
+std::string Array::getWord2(int i) {   // getter for second word
+    return data[i].word2;
 }
 
-std::string Array::getWord2(int i) {
-    return data[i][1];
+int Array::getAppearances(int i) {   // getter for appearances
+    return data[i].apps;
 }
 
-int Array::getAppearances(int i) {
-    return stoi(data[i][2]);   // string to int
-}
-
-int Array::getRows() {
+int Array::getRows() {   // getter for number of rows
     return rows;
 }
 
-bool Array::samePair(int i, std::string word1, std::string word2) {
-    return (data[i][0]==word1 && data[i][1]==word2);
+bool Array:: isSamePair(int i, int j) {   // checks if two pairs have the same words
+    return (data[i].word1 == data[j].word1 && data[i].word2 == data[j].word2);
 }
 
-int Array::timesExists(int row, std::string word1, std::string word2) {
-    int i=0, counter=0;
-    while (i < row) {
-        if (samePair(i, word1, word2)) {
-            counter++;
-        }
-        i++;
+int Array:: timesExists(int i) {   // returns number of appearances of the pair
+    int cnt = 0;   // counter
+    for (int j=0 ; j < this->getRows() ; j++) {   // loop through the rows
+        if (this->isSamePair(i, j)) cnt++;   // check if pairs are the same and increase counter
     }
-    return counter;
+    return cnt;
 }
