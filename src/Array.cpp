@@ -45,14 +45,10 @@ int Array::getRows() {   // getter for number of rows
     return rows;
 }
 
-bool Array:: isSamePair(int i, int j) {   // checks if two pairs have the same words
-    return (data[i].word1 == data[j].word1 && data[i].word2 == data[j].word2);
-}
-
 int Array:: timesExists(int i) {   // returns number of appearances of the pair
     int cnt = 0;   // counter
     for (int j=0 ; j < this->getRows() ; j++) {   // loop through the rows
-        if (this->isSamePair(i, j)) cnt++;   // check if pairs are the same and increase counter
+        if (data[i] == data[j]) cnt++;   // check if pairs are the same and increase counter
     }
     return cnt;
 }

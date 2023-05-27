@@ -6,7 +6,7 @@
 #include <string>
 
 class Array {
-    private:
+    protected:
         pair *data;   // array of pairs
         int rows;   // number of pairs
     public:
@@ -25,6 +25,5 @@ class Array {
         // methods
         int getAppearances(int i);   // getter for appearances
         int getRows();   // getter for number of rows
-        bool isSamePair(int i, int j);   // returns true if the words of the two pairs are the same
-        int timesExists(int i);   // returns number of appearances of the pair
+        virtual int timesExists(int i);   // returns number of appearances of the pair
 };
