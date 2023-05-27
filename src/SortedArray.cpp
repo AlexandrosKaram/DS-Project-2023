@@ -17,10 +17,10 @@ void SortedArray:: swapPairs(pair& a, pair& b) {
 }
 
 int SortedArray:: timesExists(int i) {   // returns number of appearances
-    int cnt = 0;   // counter
+    int cnt = 1;   // counter
     bool flag = true;
     // loop only through the pairs around, since array is sorted
-    for (int j=i-1 ; j>=0 && flag ; j++) {
+    for (int j=i-1 ; j>=0 && flag ; j--) {
         if (data[i] == data[j]) {
             cnt++;   // if pairs are the same increase counter
         } else {

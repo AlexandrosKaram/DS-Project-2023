@@ -22,7 +22,7 @@ int main() {
 	srand(time(0));   // change the random value each time program is executed using the current time
 	int random = rand() % 5000 + 2000;   // random number between 2000 and 5000, will be used as the number of pairs
 
-	Array test(random); // create an unordered array with random rows and two columns
+	SortedArray test(random); // create an unordered array with random rows and two columns
 
 	std::string word;
 	int N = test.getRows();   // number of rows
@@ -36,6 +36,7 @@ int main() {
 	}
 	file >> word;
 	test.setWord2(N-1, word);   // include last word
+	test.quicksortArray();
 
 	// for testing reasons only - print data
 	for (int i=0 ; i<test.getRows() ; i++) {

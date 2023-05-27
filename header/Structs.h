@@ -11,26 +11,12 @@ typedef struct Pair {
 
 // overloads
 // bool operators
-bool operator==(pair& p1, pair& p2) {
-    return (p1.word1 == p2.word1) && (p1.word2 == p2.word2);
-}
+bool operator==(const pair& p1, const pair& p2);
 
-bool operator>(pair& p1, pair& p2) {
-    return p1.word1 > p2.word1 ||
-           p1.word1 == p2.word1 && p1.word2 > p2.word2;
-}
+bool operator>(const pair& p1, const pair& p2);
 
-bool operator>=(pair& p1, pair& p2) {
-    return p1.word1 >= p2.word1 ||
-           p1.word1 == p2.word1 && p1.word2 >= p2.word2;
-}
+bool operator>=(const pair& p1, const pair& p2);
 
-bool operator<(pair& p1, pair& p2) {
-    return p1.word1 < p2.word1 ||
-           p1.word1 == p2.word1 && p1.word2 < p2.word2;
-}
+bool operator<(const pair& p1, const pair& p2);
 
-bool operator<=(pair& p1, pair& p2) {
-    return p1.word1 <= p2.word1 ||
-           p1.word1 == p2.word1 && p1.word2 <= p2.word2;
-}
+bool operator<=(const pair& p1, const pair& p2);
