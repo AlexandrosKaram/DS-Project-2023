@@ -1,6 +1,6 @@
-// Include header files
+// include header files
 #include "../header/funcs.h"
-// Include libraries
+// include libraries
 #include <fstream>
 #include <string>
 #include <cctype>
