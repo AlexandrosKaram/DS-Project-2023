@@ -9,6 +9,7 @@ class Array {
     protected:
     pair *data;   // array of pairs
     int rows;   // number of pairs
+    double time;   // time to create pairs
 
     public:
     // constructors - destructors
