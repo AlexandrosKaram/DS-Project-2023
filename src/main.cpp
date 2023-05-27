@@ -22,8 +22,8 @@ int main() {
 	//Array array(random);   // create an array with random pairs as lines
 	//test.createPairs("formated.txt", random);   // add N random pairs to array
 
-	//SortedArray sortedArray(random); // create a sorted array with random pairs as lines
-	//sortedArray.createPairs("formated.txt", random); // add N random pairs to array
+	//SortedArray sortedArray(random);   // create a sorted array with random pairs as lines
+	//sortedArray.createPairs("formated.txt", random);   // add N random pairs to array
 
 	return 0;
 }
