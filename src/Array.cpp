@@ -4,10 +4,12 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <time.h>
 
 Array::Array() {};   // empty constructor
 
 Array::Array(int rows) {   // constructor that creates an array with specific number of rows
+    this->time = 0;
     this->rows = rows; 
     data = new pair[rows];   // allocate memory for the array
     for (int i=0 ; i < rows ; i++) {
@@ -56,6 +58,8 @@ int Array:: timesExists(int i) {   // returns number of appearances of the pair
 }
 
 void Array:: createPairs(std::string fileName, int random) {
+    clock_t start = clock();   // track start time
+
     std::ifstream file;
 	file.open(fileName);
 
@@ -80,4 +84,8 @@ void Array:: createPairs(std::string fileName, int random) {
 	}
 		
 	file.close();
+
+    clock_t end = clock();   // track end time
+    this->time = double(end - start)/CLOCKS_PER_SEC;   // calculate elapsed time
+    std::cout << "Time to create pairs: " << this->time << " seconds." << std::endl;   // testing reasons only
 };
