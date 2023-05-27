@@ -1,6 +1,8 @@
 // include header files
 #include "../header/Array.h"
 // include libraries
+#include <iostream>
+#include <fstream>
 #include <string>
 
 Array::Array() {};   // empty constructor
@@ -52,3 +54,30 @@ int Array:: timesExists(int i) {   // returns number of appearances of the pair
     }
     return cnt;
 }
+
+void Array:: createPairs(std::string fileName, int random) {
+    std::ifstream file;
+	file.open(fileName);
+
+	std::string word;
+	int N = this->getRows();   // number of rows
+	file.seekg(N,std::ios::beg);   // start from a random (N) position indicator
+	file >> word;	// read word from the file
+	this->setWord1(0, word);   // include first word
+	for (int i=0 ; i<N-1 ; i++) {
+		file >> word;
+		this->setWord2(i, word);   // use word as second in this pair and first in next pair
+		this->setWord1(i+1, word); 
+	}
+	file >> word;
+	this->setWord2(N-1, word);   // include last word
+
+	// for testing reasons only - print data
+	for (int i=0 ; i<this->getRows() ; i++) {
+		this->setAppearances(i, this->timesExists(i));
+		std::cout << "[" << this->getWord1(i) << ", " << this->getWord2(i) << ", " << this->getAppearances(i) << "]";
+		std::cout << std::endl;
+	}
+		
+	file.close();
+};

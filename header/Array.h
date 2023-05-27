@@ -24,6 +24,7 @@ class Array {
     std::string getWord2(int i);   // getter for second word
     
     // methods
+    void createPairs(std::string fileName, int random); // add random continuous pairs to the array
     int getAppearances(int i);   // getter for appearances
     int getRows();   // getter for number of rows
     virtual int timesExists(int i);   // returns number of appearances of the pair
