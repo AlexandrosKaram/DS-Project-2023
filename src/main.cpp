@@ -14,31 +14,31 @@
 #include <cstdlib>
 
 int main() {
-	formatFile("small-file.txt", "output.txt"); // Custom function that formats the file
+	formatFile("small-file.txt", "formated.txt");   // custom function that formats the file
 
 	std::ifstream file;
-	file.open("output.txt");
+	file.open("formated.txt");
 
-	srand(time(0)); // Change the random value each time program is executed using the current time.
-	int random = rand() % 5000 + 2000; // Random number between 2000 and 5000, will be used as the number of pairs.
+	srand(time(0));   // change the random value each time program is executed using the current time
+	int random = rand() % 5000 + 2000;   // random number between 2000 and 5000, will be used as the number of pairs
 
-	Array test(random); // Create an unordered array with random rows and two columns.
+	Array test(random); // create an unordered array with random rows and two columns
 
 	std::string word;
-	int row=0;
+	int N = test.getRows();   // number of rows
 
-	file >> word; // Get first word
-	test.setWord1(row, word); // Include first word
-	while (row < test.getRows()-1) {
-		file >> word; // Get next word
-		test.setWord2(row, word); // Include next word
-		test.setWord1(++row, word); // Use next word as first word in the next pair
+	file >> word;	// read word from the file
+	test.setWord1(0, word);   // include first word
+	for (int i=0 ; i<N-1 ; i++) {
+		file >> word;
+		test.setWord2(i, word);   // use word as second in this pair and first in next pair
+		test.setWord1(i+1, word); 
 	}
-	file >> word; // Get last word
-	test.setWord2(row, word); // Include last word
+	file >> word;
+	test.setWord2(N-1, word);   // include last word
 
-	// For testing reasons only - Print data
-	for (int i=0;i<test.getRows();i++) {
+	// for testing reasons only - print data
+	for (int i=0 ; i<test.getRows() ; i++) {
 		std::cout << "[" << test.getWord1(i) << ", " << test.getWord2(i) << ", " << test.getAppearances(i) << "]";
 		std::cout << std::endl;
 	}
