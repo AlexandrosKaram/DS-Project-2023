@@ -4,12 +4,11 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <time.h>
+#include <chrono>
 
 Array::Array() {};   // empty constructor
 
 Array::Array(int rows) {   // constructor that creates an array with specific number of rows
-    this->time = 0;
     this->rows = rows; 
     data = new pair[rows];   // allocate memory for the array
     for (int i=0 ; i < rows ; i++) {
@@ -50,15 +49,19 @@ int Array::getRows() {   // getter for number of rows
 }
 
 int Array:: timesExists(int i) {   // returns number of appearances of the pair
+    auto startSearching = std::chrono::high_resolution_clock::now();   // track start time of searching an individual pair
     int cnt = 0;   // counter
     for (int j=0 ; j < this->getRows() ; j++) {   // loop through the rows
         if (data[i] == data[j]) cnt++;   // check if pairs are the same and increase counter
     }
+    auto endSearching = std::chrono::high_resolution_clock::now();   // track end time of searching an individual pair
+    std::chrono::duration<double> duration = endSearching - startSearching;   // calculate duration of searching an individual pair
+    this->searchingTime += duration.count();   // add duration of an individual pair
     return cnt;
 }
 
 void Array:: createPairs(std::string fileName, int random) {
-    clock_t start = clock();   // track start time
+    auto startConstructing = std::chrono::high_resolution_clock::now();   // track start time of constructing
 
     std::ifstream file;
 	file.open(fileName);
@@ -76,6 +79,10 @@ void Array:: createPairs(std::string fileName, int random) {
 	file >> word;
 	this->setWord2(N-1, word);   // include last word
 
+    auto endConstructing = std::chrono::high_resolution_clock::now();   // track end time of constructing
+    std::chrono::duration<double> duration = endConstructing - startConstructing;   // calculate duration of constructing
+    this->constructingTime = duration.count();   // assign duration
+
 	// for testing reasons only - print data
 	for (int i=0 ; i < N ; i++) {
 		this->setAppearances(i, this->timesExists(i));
@@ -85,7 +92,6 @@ void Array:: createPairs(std::string fileName, int random) {
 		
 	file.close();
 
-    clock_t end = clock();   // track end time
-    this->time = double(end - start)/CLOCKS_PER_SEC;   // calculate elapsed time
-    std::cout << "Time to create pairs: " << this->time << " seconds." << std::endl;   // testing reasons only
+    std::cout << "Time to create pairs: " << this->constructingTime << " seconds." << std::endl;   // testing reasons only
+    std::cout << "Time to search pairs: " << this->searchingTime << " seconds." << std::endl;   // testing reasons only
 };
