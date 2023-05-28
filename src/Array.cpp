@@ -92,6 +92,6 @@ void Array:: createPairs(std::string fileName, int random) {
 		
 	file.close();
 
-    std::cout << "Time to create pairs: " << this->constructingTime << " seconds." << std::endl;   // testing reasons only
-    std::cout << "Time to search pairs: " << this->searchingTime << " seconds." << std::endl;   // testing reasons only
+    std::cout << "Time to create pairs for Array: " << this->constructingTime << " seconds." << std::endl;   // testing reasons only
+    std::cout << "Time to search pairs for Array: " << this->searchingTime << " seconds." << std::endl;   // testing reasons only
 };
