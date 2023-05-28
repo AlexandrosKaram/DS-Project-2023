@@ -19,11 +19,11 @@ int main() {
 	srand(time(0));   // change the random value each time program is executed using the current time
 	int random = rand() % 5000 + 2000;   // random number between 2000 and 5000, will be used as the number of pairs
 
-	//Array array(random);   // create an array with random pairs as lines
-	//test.createPairs("formated.txt", random);   // add N random pairs to array
+	// Array array(random);   // create an array with random pairs as lines
+	// array.createPairs("formated.txt", random);   // add N random pairs to array
 
-	//SortedArray sortedArray(random);   // create a sorted array with random pairs as lines
-	//sortedArray.createPairs("formated.txt", random);   // add N random pairs to array
+	// SortedArray sortedArray(random);   // create a sorted array with random pairs as lines
+	// sortedArray.createPairs("formated.txt", random);   // add N random pairs to array
 
 	return 0;
 }

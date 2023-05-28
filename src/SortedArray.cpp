@@ -95,7 +95,7 @@ void SortedArray:: createPairs(std::string fileName, int random) {
     this->quicksortArray();
 
 	// for testing reasons only - print data
-	for (int i=0 ; i<this->getRows() ; i++) {
+	for (int i=0 ; i < N ; i++) {
 		this->setAppearances(i, this->timesExists(i));
 		std::cout << "[" << this->getWord1(i) << ", " << this->getWord2(i) << ", " << this->getAppearances(i) << "]";
 		std::cout << std::endl;
