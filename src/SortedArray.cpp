@@ -5,7 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <time.h>
+#include <chrono>
 
 SortedArray:: SortedArray() : Array() {};   // default constructor
 
@@ -20,6 +20,7 @@ void SortedArray:: swapPairs(pair& a, pair& b) {
 }
 
 int SortedArray:: timesExists(int i) {   // returns number of appearances
+    auto startSearching = std::chrono::high_resolution_clock::now();   // track start time of searching an individual pair
     int cnt = 1;   // counter
     bool flag = true;
     // loop only through the pairs around, since array is sorted
@@ -38,7 +39,9 @@ int SortedArray:: timesExists(int i) {   // returns number of appearances
             flag = false;
         }
     }
-
+    auto endSearching = std::chrono::high_resolution_clock::now();   // track end time of searching an individual pair
+    std::chrono::duration<double> duration = endSearching - startSearching;   // calculate duration of searching an individual pair
+    this->searchingTime += duration.count();   // add duration of an individual pair
     return cnt;   // return counter
 }
 
@@ -75,7 +78,7 @@ void SortedArray:: quicksortArray() {
 }
 
 void SortedArray:: createPairs(std::string fileName, int random) {
-    clock_t start = clock();   // track start time
+    auto startConstructing = std::chrono::high_resolution_clock::now();   // track start time of constructing
 
     std::ifstream file;
 	file.open(fileName);
@@ -94,6 +97,10 @@ void SortedArray:: createPairs(std::string fileName, int random) {
 	this->setWord2(N-1, word);   // include last word
     this->quicksortArray();
 
+    auto endConstructing = std::chrono::high_resolution_clock::now();   // track end time of constructing
+    std::chrono::duration<double> duration = endConstructing - startConstructing;   // calculate duration of constructing
+    this->constructingTime = duration.count();   // assign duration
+
 	// for testing reasons only - print data
 	for (int i=0 ; i < N ; i++) {
 		this->setAppearances(i, this->timesExists(i));
@@ -103,7 +110,6 @@ void SortedArray:: createPairs(std::string fileName, int random) {
 		
 	file.close();
 
-    clock_t end = clock();   // track end time
-    this->time = double(end - start)/CLOCKS_PER_SEC;   // calculate elapsed time
-    std::cout << "Time to create pairs: " << this->time << " seconds." << std::endl;   // testing reasons only
+    std::cout << "Time to create pairs for Sorted Array: " << this->constructingTime << " seconds." << std::endl;   // testing reasons only
+    std::cout << "Time to search pairs for Sorted Array: " << this->searchingTime << " seconds." << std::endl;   // testing reasons only
 };
