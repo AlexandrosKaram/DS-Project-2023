@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include <cctype>
+#include <time.h>
 
 void formatFile(std::string inputFilename, std::string outputFilename) {
     // open input and output files
@@ -34,19 +35,19 @@ void formatFile(std::string inputFilename, std::string outputFilename) {
     outputFile.close();
 }
 
-pair* createSet(std::string file) {
+pair* createSet(File formated, size_t& setSize) {   // create Q set with random pairs
     srand(time(nullptr));   // set random based on current time
-    int N = rand() % 3000+1000;   // random number between 1000 and 3000 (array size)
+    setSize = rand() % 3000+1000;   // random number between 1000 and 3000 (array size)
 
     std::ifstream f;
-    f.open(file);
+    f.open(formated.getName());
     // get size of the file by seeing in which byte the pointer is
     f.seekg(0, std::ios::end);
     int end = f.tellg();   
 
-    pair* pairs = new pair[N];   // create pair array of size N
+    pair* pairs = new pair[setSize];   // create pair array of size N
 
-    for (int i=0 ; i<N ; i++) {
+    for (int i=0 ; i<setSize ; i++) {
         // get random position within the file
         srand(time(nullptr));
         int pos = rand() % end;  
@@ -62,6 +63,7 @@ pair* createSet(std::string file) {
         pairs[i].word2 = word;
         pairs[i].apps = 0;
     }
+    f.close();
 
     return pairs;
 }
