@@ -9,8 +9,8 @@ class Array {
     protected:
     pair *data;   // array of pairs
     int size;   // number of pairs
-    double constructingTime=0;   // time to create pairs
-    double searchingTime=0;   // time to search pairs
+    double constructingTime;   // time to create pairs
+    double searchingTime;   // time to search pairs
 
     public:
     // constructors - destructors

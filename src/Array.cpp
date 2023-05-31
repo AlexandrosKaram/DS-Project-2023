@@ -48,23 +48,11 @@ int Array::getSize() {   // getter for number of rows
     return size;
 }
 
-int Array:: timesExists(int i) {   // returns number of appearances of the pair
-    auto startSearching = std::chrono::high_resolution_clock::now();   // track start time of searching an individual pair
-    int cnt = 0;   // counter
-    for (int j=0 ; j < this->getSize() ; j++) {   // loop through the rows
-        if (data[i] == data[j]) cnt++;   // check if pairs are the same and increase counter
-    }
-    auto endSearching = std::chrono::high_resolution_clock::now();   // track end time of searching an individual pair
-    std::chrono::duration<double> duration = endSearching - startSearching;   // calculate duration of searching an individual pair
-    this->searchingTime += duration.count();   // add duration of an individual pair
-    return cnt;
-}
-
-void Array:: createPairs(File formated) {
+void Array:: createPairs(File formated) {   // put all pairs of the file in an array
     auto startConstructing = std::chrono::high_resolution_clock::now();   // track start time of constructing
 
     std::ifstream file;
-	file.open(formated.getName());
+	file.open(formated.getName());   // open file
 
     int size = formated.getPairCount();   // size of array
     std::string word;
@@ -82,17 +70,10 @@ void Array:: createPairs(File formated) {
     auto endConstructing = std::chrono::high_resolution_clock::now();   // track end time of constructing
     std::chrono::duration<double> duration = endConstructing - startConstructing;   // calculate duration of constructing
     this->constructingTime = duration.count();   // assign duration
-
-	// for testing reasons only - print data
-	// for (int i=0 ; i < size ; i++) {
-	// 	this->setAppearances(i, this->timesExists(i));
-	// 	std::cout << "[" << this->getWord1(i) << ", " << this->getWord2(i) << ", " << this->getAppearances(i) << "]";
-	// 	std::cout << std::endl;
-	// }
 		
 	file.close();
 
-    std::cout << "Time to create pairs for Array: " << this->constructingTime << " seconds." << std::endl;   // testing reasons only
+    std::cout << "Time to create " << size << " pairs for Array: " << this->constructingTime << " seconds." << std::endl;   // testing reasons only
 };
 
 void Array:: searchPairs(pair* pairs, size_t setSize) {   // search pairs from Q set
@@ -108,5 +89,5 @@ void Array:: searchPairs(pair* pairs, size_t setSize) {   // search pairs from Q
     std::chrono::duration<double> duration = endSearching - startSearching;   // calculate duration of searching 
     searchingTime = duration.count();
 
-    std::cout << "Time to search pairs for Array: " << this->searchingTime << " seconds." << std::endl;   // testing reasons only
+    std::cout << "Time to search " << setSize << " pairs for Array: " << this->searchingTime << " seconds." << std::endl;   // testing reasons only
 }
