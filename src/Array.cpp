@@ -76,7 +76,7 @@ void Array:: createPairs(File formated) {   // put all pairs of the file in an a
     std::ofstream output;
     output.open("results/Array.txt", std::ios::out);
 
-    output << "Time to create " << size << " pairs for Array: " << this->constructingTime << " seconds." << std::endl;   // testing reasons only
+    output << "Time to create " << size << " pairs for Array: " << this->constructingTime << " seconds." << std::endl;
 };
 
 void Array:: searchPairs(pair* pairs, size_t setSize) {   // search pairs from Q set with linear search
@@ -101,6 +101,6 @@ void Array:: searchPairs(pair* pairs, size_t setSize) {   // search pairs from Q
 
     output << std::endl << "Pairs and their number of appearances:" << std::endl;
     for (int i=0 ; i<setSize ; i++) {   
-        output << "{" << pairs[i].word1 << "," << pairs[i].word2 << " : " << pairs[i].apps << "}" << std::endl;   // print pairs and their appearances
+        output << pairs[i] << std::endl;   // print pairs and their appearances
     }
 }

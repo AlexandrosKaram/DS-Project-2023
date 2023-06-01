@@ -2,15 +2,15 @@
 
 // include header files
 #include "Array.h"
-#include "Structs.h"
-// include libraries
 
 // declare SortedArray class
 class SortedArray: public Array {   // derived class of Array
     private:
     int partition(pair* arr, int low, int high);  // Helper function for partition step
     void quicksort(pair* arr, int low, int high);  // Quicksort function
-    
+    void swapPairs(pair& a, pair& b);   // swaps two pairs
+    int binarySearchPair(pair& key, int low, int high);   // function to binary search the key
+
     public:
     // constructors - destructors
     SortedArray();   // default constructor
@@ -18,8 +18,7 @@ class SortedArray: public Array {   // derived class of Array
     ~SortedArray();   // destructor
     
     // methods
-    void createPairs(std::string fileName, int random);
-    void quicksortArray();  // quick sort the array
-    void swapPairs(pair& a, pair& b);   // swaps two pairs
-    int timesExists(int i);   // returns number of appearances
+    void createPairs(File formated);   // create the pairs
+    void quicksortArray();  // quicksort the array
+    void searchPairs(pair* pairs, size_t setSize);   // search the pairs
 };

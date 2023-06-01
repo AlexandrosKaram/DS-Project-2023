@@ -1,6 +1,6 @@
 // include header files
 #include "../header/funcs.h"
-#include "../header/Structs.h"
+#include "../header/pair.h"
 // include libraries
 #include <fstream>
 #include <string>

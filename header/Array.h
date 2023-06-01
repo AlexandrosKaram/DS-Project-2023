@@ -1,9 +1,8 @@
 # pragma once
 
 // include header files
-#include "Structs.h"
+#include "pair.h"
 #include "File.h"
-// include libraries
 
 class Array {
     protected:
@@ -28,6 +27,7 @@ class Array {
     int getAppearances(int i);   // getter for appearances of a specific pair
     
     // methods
-    void createPairs(File formated); // add random continuous pairs to the array
-    void searchPairs(pair* pairs, size_t setSize);
+    virtual void createPairs(File formated); // add random continuous pairs to the array
+    virtual void searchPairs(pair* pairs, size_t setSize);
+    int binarySearchPair(int pos);
 };

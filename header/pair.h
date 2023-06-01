@@ -20,3 +20,5 @@ bool operator>=(const pair& p1, const pair& p2);
 bool operator<(const pair& p1, const pair& p2);
 
 bool operator<=(const pair& p1, const pair& p2);
+
+std::ostream& operator<<(std::ostream& os, pair& p);

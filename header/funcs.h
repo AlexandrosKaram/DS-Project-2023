@@ -2,7 +2,7 @@
 
 //Include libraries
 #include <string>
-#include "Structs.h"
+#include "pair.h"
 #include "File.h"
 
 void formatFile(std::string inputFilename, std::string outputFilename); // Removes punctuation and convert all characters to lowercase

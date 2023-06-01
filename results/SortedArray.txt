@@ -1,5 +1,5 @@
-Time to create 254031 pairs for Array: 0.139339 seconds.
-Time to search 1856 pairs for Array: 4.5096 seconds.
+Time to create 254031 pairs for Array: 6.43822 seconds.
+Time to search 1856 pairs for Array: 0.013998 seconds.
 
 Pairs and their number of appearances:
 [{679, list} Appearances: 1]
