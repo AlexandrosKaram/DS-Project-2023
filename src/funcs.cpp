@@ -37,7 +37,7 @@ void formatFile(std::string inputFilename, std::string outputFilename) {
 
 pair* createSet(File formated, size_t& setSize) {   // create Q set with random pairs
     srand(time(nullptr));   // set random based on current time
-    setSize = rand() % 1000+1000;   // random number between 1000 and 2000 (array size)
+    setSize = rand() % 2000+1000;   // random number between 1000 and 3000 (array size)
 
     std::ifstream f;
     f.open(formated.getName());
