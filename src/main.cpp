@@ -18,19 +18,18 @@
 
 int main() {
 	formatFile("small-file.txt", "formated.txt");   // custom function that formats the file
-	File formated("formated.txt");
-	formated.setPairCount(formated.countPairs());
+	File formated("formated.txt");   // object of class File
+	// count number of pairs in the file and save it 
+	formated.setPairCount(formated.countPairs());   
 	size_t size = formated.getPairCount();
 
-	size_t setSize;
+	size_t setSize;   // size of the Q set
 	pair* setQ = createSet(formated, setSize);   // create set with the words we need to search in the data structures
 
-	Array array(size);
-	array.createPairs(formated);
-	array.searchPairs(setQ, setSize);
-
-	// SortedArray sortedArray(random);   // create a sorted array with random pairs as lines
-	// sortedArray.createPairs("formated.txt", random);   // add N random pairs to array
-
+	Array array(size);   // create new object of array type
+	// calculate and print results for the array data structure
+	array.createPairs(formated); 
+	array.searchPairs(setQ, setSize);   
+	
 	return 0;
 }

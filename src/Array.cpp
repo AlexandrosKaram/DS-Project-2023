@@ -73,21 +73,34 @@ void Array:: createPairs(File formated) {   // put all pairs of the file in an a
 		
 	file.close();
 
-    std::cout << "Time to create " << size << " pairs for Array: " << this->constructingTime << " seconds." << std::endl;   // testing reasons only
+    std::ofstream output;
+    output.open("results/Array.txt", std::ios::out);
+
+    output << "Time to create " << size << " pairs for Array: " << this->constructingTime << " seconds." << std::endl;   // testing reasons only
 };
 
-void Array:: searchPairs(pair* pairs, size_t setSize) {   // search pairs from Q set
+void Array:: searchPairs(pair* pairs, size_t setSize) {   // search pairs from Q set with linear search
     auto startSearching = std::chrono::high_resolution_clock::now();   // track start time of searching 
-    for (int i=0 ; i<setSize ; i++) {
-        int cnt = 0;
-        for (int j=0 ; j<size ; j++) {
-            if (pairs[i] == data[j]) cnt++;
+    
+    for (int i=0 ; i<setSize ; i++) {   // loop through the set
+        int cnt = 0;   // counter
+        for (int j=0 ; j<size ; j++) {   // loop through the array
+            if (pairs[i] == data[j]) cnt++;   // increase counter every time pair is found
         }
-        pairs[i].apps = cnt;
+        pairs[i].apps = cnt;   
     }
+    
     auto endSearching = std::chrono::high_resolution_clock::now();   // track end time of searching 
     std::chrono::duration<double> duration = endSearching - startSearching;   // calculate duration of searching 
     searchingTime = duration.count();
 
-    std::cout << "Time to search " << setSize << " pairs for Array: " << this->searchingTime << " seconds." << std::endl;   // testing reasons only
+    // open output file to print the results
+    std::ofstream output;
+    output.open("results/Array.txt", std::ios::app);   // append from previous pointer position
+    output << "Time to search " << setSize << " pairs for Array: " << this->searchingTime << " seconds." << std::endl;   // print searching time
+
+    output << std::endl << "Pairs and their number of appearances:" << std::endl;
+    for (int i=0 ; i<setSize ; i++) {   
+        output << "{" << pairs[i].word1 << "," << pairs[i].word2 << " : " << pairs[i].apps << "}" << std::endl;   // print pairs and their appearances
+    }
 }

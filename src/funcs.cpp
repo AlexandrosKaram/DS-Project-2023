@@ -47,9 +47,9 @@ pair* createSet(File formated, size_t& setSize) {   // create Q set with random 
 
     pair* pairs = new pair[setSize];   // create pair array of size N
 
+    srand(time(nullptr));
     for (int i=0 ; i<setSize ; i++) {
         // get random position within the file
-        srand(time(nullptr));
         int pos = rand() % end;  
         f.seekg(pos, std::ios::beg);
 

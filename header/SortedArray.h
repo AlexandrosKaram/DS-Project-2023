@@ -4,7 +4,6 @@
 #include "Array.h"
 #include "Structs.h"
 // include libraries
-#include <iostream>
 
 // declare SortedArray class
 class SortedArray: public Array {   // derived class of Array
@@ -14,9 +13,9 @@ class SortedArray: public Array {   // derived class of Array
     
     public:
     // constructors - destructors
-    SortedArray();
-    SortedArray(int rows);
-    ~SortedArray();
+    SortedArray();   // default constructor
+    SortedArray(int size);   // constructor
+    ~SortedArray();   // destructor
     
     // methods
     void createPairs(std::string fileName, int random);
