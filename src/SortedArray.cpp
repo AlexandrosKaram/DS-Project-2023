@@ -9,19 +9,19 @@
 
 SortedArray:: SortedArray() : Array() {};   // default constructor
 
-SortedArray:: SortedArray(int rows) : Array(rows) {};   // constructor that creates an array with specific number of rows
+SortedArray:: SortedArray(int size) : Array(size) {};   // constructor that creates an array with specific number of rows
 
 SortedArray:: ~SortedArray() {};   // destructor
 
-void SortedArray:: swapPairs(pair& a, pair& b) {
-    pair temp = a;
+void SortedArray:: swapPairs(Pair& a, Pair& b) {
+    Pair temp = a;
     a = b;
     b = temp;
 }
 
 // quicksort functions
-int SortedArray:: partition(pair* data, int low, int high) {
-    pair pivot = data[high];  // last element is the pivot
+int SortedArray:: partition(Pair* data, int low, int high) {
+    Pair pivot = data[high];  // last element is the pivot
     int i = low-1;
 
     for (int j = low ; j <= high-1 ; j++) {
@@ -37,7 +37,7 @@ int SortedArray:: partition(pair* data, int low, int high) {
     return i+1;
 }
 
-void SortedArray:: quicksort(pair* data, int low, int high) {
+void SortedArray:: quicksort(Pair* data, int low, int high) {
     if (low < high) {
         int pi = partition(data, low, high);
 
@@ -61,14 +61,14 @@ void SortedArray:: createPairs(File formated) {
     std::string word;
 	
     file >> word;	// read word from the file
-	this->setWord1(0, word);   // include first word
+	data[0].setWord1(word);   // include first word
 	for (int i=0 ; i<size-1 ; i++) {
 		file >> word;
-		this->setWord2(i, word);   // use word as second in this pair and first in next pair
-		this->setWord1(i+1, word); 
+		data[i].setWord2(word);   // use word as second in this Pair and first in next Pair
+		data[i].setWord1(word); 
 	}
 	file >> word;
-	this->setWord2(size-1, word);   // include last word
+	data[size-1].setWord2(word);;   // include last word
     this->quicksortArray();   // quicksort the array
 
     auto endConstructing = std::chrono::high_resolution_clock::now();   // track end time of constructing
@@ -84,7 +84,7 @@ void SortedArray:: createPairs(File formated) {
     output << "Time to create " << size << " pairs for Array: " << this->constructingTime << " seconds." << std::endl;
 };
 
-int SortedArray:: binarySearchPair(pair& key, int low, int high) {
+int SortedArray:: binarySearchPair(Pair& key, int low, int high) {
     int mid = (high + low)/2;
 
     if (low <= high) {
@@ -98,18 +98,18 @@ int SortedArray:: binarySearchPair(pair& key, int low, int high) {
     return -1;
 }
 
-void SortedArray:: searchPairs(pair* pairs, size_t setSize) {
+void SortedArray:: searchPairs(Pair* pairs, size_t setSize) {
     auto startSearching = std::chrono::high_resolution_clock::now();   // track start time of searching 
     
     for (int i=0 ; i<setSize ; i++) {   // loop through the set
         int cnt = 1;
-        // look for one of the pair's appearances with binary search
+        // look for one of the Pair's appearances with binary search
         int pos = binarySearchPair(pairs[i], 0, size);   
         bool flag = true;
         // pairs will be continuous since array is sorted so look for pairs around
         for (int j=pos+1 ; j<size && flag ; j++) {
             if (data[j] == pairs[i]){
-                cnt++;   // increase counter every time pair is found
+                cnt++;   // increase counter every time Pair is found
             } else {
                 flag = false;   // set flag to false and stop the loop
             }
@@ -124,7 +124,7 @@ void SortedArray:: searchPairs(pair* pairs, size_t setSize) {
             }
         }
 
-        pairs[i].apps = cnt;
+        pairs[i].setAppearances(cnt);
     }
     
     auto endSearching = std::chrono::high_resolution_clock::now();   // track end time of searching 

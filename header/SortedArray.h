@@ -6,10 +6,11 @@
 // declare SortedArray class
 class SortedArray: public Array {   // derived class of Array
     private:
-    int partition(pair* arr, int low, int high);  // Helper function for partition step
-    void quicksort(pair* arr, int low, int high);  // Quicksort function
-    void swapPairs(pair& a, pair& b);   // swaps two pairs
-    int binarySearchPair(pair& key, int low, int high);   // function to binary search the key
+    // helper functions
+    int partition(Pair* arr, int low, int high);  // Helper function for partition step
+    void quicksort(Pair* arr, int low, int high);  // Quicksort function
+    void swapPairs(Pair& a, Pair& b);   // swaps two pairs
+    int binarySearchPair(Pair& key, int low, int high);   // function to binary search the key
 
     public:
     // constructors - destructors
@@ -20,5 +21,5 @@ class SortedArray: public Array {   // derived class of Array
     // methods
     void createPairs(File formated);   // create the pairs
     void quicksortArray();  // quicksort the array
-    void searchPairs(pair* pairs, size_t setSize);   // search the pairs
+    void searchPairs(Pair* pairs, size_t setSize);   // search the pairs
 };

@@ -38,7 +38,7 @@ void Array:: createPairs(File formated) {   // put all pairs of the file in an a
 		data[i].setWord1(word); 
 	}
 	file >> word;
-	data[size-1].setWord2(word);;   // include last word
+	data[size-1].setWord2(word);   // include last word
 
     auto endConstructing = std::chrono::high_resolution_clock::now();   // track end time of constructing
     std::chrono::duration<double> duration = endConstructing - startConstructing;   // calculate duration of constructing
