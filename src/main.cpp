@@ -6,7 +6,7 @@
 #include "../header/HashTable.h"
 #include "../header/SortedArray.h"
 #include "../header/funcs.h"
-#include "../header/pair.h"
+#include "../header/Pair.h"
 #include "../header/File.h"
 #include <time.h>
 
@@ -24,7 +24,7 @@ int main() {
 	size_t size = formated.getPairCount();
 
 	size_t setSize;   // size of the Q set
-	pair* setQ = createSet(formated, setSize);   // create set with the words we need to search in the data structures
+	Pair* setQ = createSet(formated, setSize);   // create set with the words we need to search in the data structures
 
 	Array array(size);   // create new object of array class
 	// calculate and print results for the array data structure

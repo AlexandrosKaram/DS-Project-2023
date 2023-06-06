@@ -1,6 +1,6 @@
 // include header files
 #include "../header/funcs.h"
-#include "../header/pair.h"
+#include "../header/Pair.h"
 // include libraries
 #include <fstream>
 #include <string>
@@ -35,9 +35,8 @@ void formatFile(std::string inputFilename, std::string outputFilename) {
     outputFile.close();
 }
 
-pair* createSet(File formated, size_t& setSize) {   // create Q set with random pairs
-    srand(time(nullptr));   // set random based on current time
-    setSize = rand() % 2000+1000;   // random number between 1000 and 3000 (array size)
+Pair* createSet(File formated, size_t& setSize) {   // create Q set with random pairs
+    setSize = 1000;   // size of the set
 
     std::ifstream f;
     f.open(formated.getName());
@@ -45,7 +44,7 @@ pair* createSet(File formated, size_t& setSize) {   // create Q set with random 
     f.seekg(0, std::ios::end);
     int end = f.tellg();   
 
-    pair* pairs = new pair[setSize];   // create pair array of size N
+    Pair* pairs = new Pair[setSize];   // create Pair array of size N
 
     srand(time(nullptr));
     for (int i=0 ; i<setSize ; i++) {
@@ -56,12 +55,11 @@ pair* createSet(File formated, size_t& setSize) {   // create Q set with random 
         std::string word;
         f >> word;   // get rid of word in case pointer is not in suitable position
     
-        // create pair and add it to the array
+        // create Pair and add it to the array
         f >> word;
-        pairs[i].word1 = word;
+        pairs[i].setWord1(word);
         f >> word;
-        pairs[i].word2 = word;
-        pairs[i].apps = 0;
+        pairs[i].setWord2(word);
     }
     f.close();
 
