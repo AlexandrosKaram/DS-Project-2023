@@ -10,38 +10,11 @@ Array::Array() {};   // empty constructor
 
 Array::Array(int size) {   // constructor that creates an array with specific size
     this->size = size; 
-    data = new pair[size];   // allocate memory for the array
-    for (int i=0 ; i < size ; i++) {
-        data[i].apps = 0;   // initialize appearances as 0
-    }
+    data = new Pair[size];   // allocate memory for the array
 }
 
 Array::~Array() {   // destructor
     delete[] data;   // deallocate memory
-}
-
-void Array::setWord1(int i, std::string word1) {   // setter for first word
-    data[i].word1 = word1;   
-}
-
-void Array::setWord2(int i, std::string word2) {   // setter for second word
-    data[i].word2 = word2;   
-}
- 
-void Array::setAppearances(int i, int n) {   // setter for appearances
-    data[i].apps = n; 
-}
-
-std::string Array::getWord1(int i) {   // getter for first word
-    return data[i].word1;
-}
-
-std::string Array::getWord2(int i) {   // getter for second word
-    return data[i].word2;
-}
-
-int Array::getAppearances(int i) {   // getter for appearances
-    return data[i].apps;
 }
 
 int Array::getSize() {   // getter for number of rows
@@ -58,14 +31,14 @@ void Array:: createPairs(File formated) {   // put all pairs of the file in an a
     std::string word;
 	
     file >> word;	// read word from the file
-	this->setWord1(0, word);   // include first word
+	data[0].setWord1(word);   // include first word
 	for (int i=0 ; i<size-1 ; i++) {
 		file >> word;
-		this->setWord2(i, word);   // use word as second in this pair and first in next pair
-		this->setWord1(i+1, word); 
+		data[i].setWord2(word);   // use word as second in this Pair and first in next Pair
+		data[i].setWord1(word); 
 	}
 	file >> word;
-	this->setWord2(size-1, word);   // include last word
+	data[size-1].setWord2(word);;   // include last word
 
     auto endConstructing = std::chrono::high_resolution_clock::now();   // track end time of constructing
     std::chrono::duration<double> duration = endConstructing - startConstructing;   // calculate duration of constructing
@@ -79,15 +52,15 @@ void Array:: createPairs(File formated) {   // put all pairs of the file in an a
     output << "Time to create " << size << " pairs for Array: " << this->constructingTime << " seconds." << std::endl;
 };
 
-void Array:: searchPairs(pair* pairs, size_t setSize) {   // search pairs from Q set with linear search
+void Array:: searchPairs(Pair* pairs, size_t setSize) {   // search pairs from Q set with linear search
     auto startSearching = std::chrono::high_resolution_clock::now();   // track start time of searching 
     
     for (int i=0 ; i<setSize ; i++) {   // loop through the set
         int cnt = 0;   // counter
         for (int j=0 ; j<size ; j++) {   // loop through the array
-            if (pairs[i] == data[j]) cnt++;   // increase counter every time pair is found
+            if (pairs[i] == data[j]) cnt++;   // increase counter every time Pair is found
         }
-        pairs[i].apps = cnt;   
+        pairs[i].setAppearances(cnt);   
     }
     
     auto endSearching = std::chrono::high_resolution_clock::now();   // track end time of searching 
