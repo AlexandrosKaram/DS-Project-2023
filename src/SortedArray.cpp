@@ -65,7 +65,7 @@ void SortedArray:: createPairs(File formated) {
 	for (int i=0 ; i<size-1 ; i++) {
 		file >> word;
 		data[i].setWord2(word);   // use word as second in this Pair and first in next Pair
-		data[i].setWord1(word); 
+		data[i+1].setWord1(word); 
 	}
 	file >> word;
 	data[size-1].setWord2(word);;   // include last word

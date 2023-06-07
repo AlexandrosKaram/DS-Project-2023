@@ -22,5 +22,5 @@ class Array {
    
     // methods
     virtual void createPairs(File formated); // add random continuous pairs to the array
-    virtual void searchPairs(Pair* pairs, size_t setSize);
+    virtual void searchPairs(Pair* pairs, size_t setSize);   // linear search the pairs
 };

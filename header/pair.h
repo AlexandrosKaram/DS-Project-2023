@@ -9,10 +9,8 @@ class Pair {
     int apps;
 
     public:
-    // constructors
+    // constructor
     Pair();
-    Pair(std::string, std::string);
-    Pair(std::string, std::string, int);
     // destructor
     ~Pair();
     // setters
@@ -26,10 +24,10 @@ class Pair {
 };
 
 // overloads
-bool operator==(const Pair& p1, const Pair& p2);
-bool operator>(const Pair& p1, const Pair& p2);
-bool operator>=(const Pair& p1, const Pair& p2);
-bool operator<(const Pair& p1, const Pair& p2);
-bool operator<=(const Pair& p1, const Pair& p2);
+bool operator==(Pair& p1, Pair& p2);
+bool operator>(Pair& p1, Pair& p2);
+bool operator>=(Pair& p1, Pair& p2);
+bool operator<(Pair& p1, Pair& p2);
+bool operator<=(Pair& p1, Pair& p2);
 
 std::ostream& operator<<(std::ostream& os, Pair& p);

@@ -27,7 +27,6 @@ void Array:: createPairs(File formated) {   // put all pairs of the file in an a
     std::ifstream file;
 	file.open(formated.getName());   // open file
 
-    int size = formated.getPairCount();   // size of array
     std::string word;
 	
     file >> word;	// read word from the file
@@ -35,7 +34,7 @@ void Array:: createPairs(File formated) {   // put all pairs of the file in an a
 	for (int i=0 ; i<size-1 ; i++) {
 		file >> word;
 		data[i].setWord2(word);   // use word as second in this Pair and first in next Pair
-		data[i].setWord1(word); 
+		data[i+1].setWord1(word); 
 	}
 	file >> word;
 	data[size-1].setWord2(word);   // include last word
