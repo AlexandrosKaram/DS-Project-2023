@@ -4,23 +4,13 @@
 #include <iostream>
 
 class Pair {
-    protected:
+    public:
     std::string word1, word2;
     int apps;
-
-    public:
     // constructor
     Pair();
     // destructor
     ~Pair();
-    // setters
-    void setWord1(std::string);
-    void setWord2(std::string);
-    void setAppearances(int);
-    // getters
-    std::string getWord1();
-    std::string getWord2();
-    int getAppearances();
 };
 
 // overloads

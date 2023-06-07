@@ -57,9 +57,9 @@ Pair* createSet(File formated, size_t& setSize) {   // create Q set with random 
     
         // create Pair and add it to the array
         f >> word;
-        pairs[i].setWord1(word);
+        pairs[i].word1 = word;
         f >> word;
-        pairs[i].setWord2(word);
+        pairs[i].word2 = word;
     }
     f.close();
 

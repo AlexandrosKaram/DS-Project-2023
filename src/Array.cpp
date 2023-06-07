@@ -30,14 +30,14 @@ void Array:: createPairs(File formated) {   // put all pairs of the file in an a
     std::string word;
 	
     file >> word;	// read word from the file
-	data[0].setWord1(word);   // include first word
+	data[0].word1 = word;   // include first word
 	for (int i=0 ; i<size-1 ; i++) {
 		file >> word;
-		data[i].setWord2(word);   // use word as second in this Pair and first in next Pair
-		data[i+1].setWord1(word); 
+		data[i].word2 = word;   // use word as second in this Pair and first in next Pair
+		data[i+1].word1 = word; 
 	}
 	file >> word;
-	data[size-1].setWord2(word);   // include last word
+	data[size-1].word2 = word;   // include last word
 
     auto endConstructing = std::chrono::high_resolution_clock::now();   // track end time of constructing
     std::chrono::duration<double> duration = endConstructing - startConstructing;   // calculate duration of constructing
@@ -59,7 +59,7 @@ void Array:: searchPairs(Pair* pairs, size_t setSize) {   // search pairs from Q
         for (int j=0 ; j<size ; j++) {   // loop through the array
             if (pairs[i] == data[j]) cnt++;   // increase counter every time Pair is found
         }
-        pairs[i].setAppearances(cnt);   
+        pairs[i].apps = cnt;   
     }
     
     auto endSearching = std::chrono::high_resolution_clock::now();   // track end time of searching 

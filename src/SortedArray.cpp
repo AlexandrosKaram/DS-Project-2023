@@ -61,14 +61,14 @@ void SortedArray:: createPairs(File formated) {
     std::string word;
 	
     file >> word;	// read word from the file
-	data[0].setWord1(word);   // include first word
+	data[0].word1 = word;   // include first word
 	for (int i=0 ; i<size-1 ; i++) {
 		file >> word;
-		data[i].setWord2(word);   // use word as second in this Pair and first in next Pair
-		data[i+1].setWord1(word); 
+		data[i].word2 = word;   // use word as second in this Pair and first in next Pair
+		data[i+1].word1 = word; 
 	}
 	file >> word;
-	data[size-1].setWord2(word);;   // include last word
+	data[size-1].word2 = word;   // include last word
     this->quicksortArray();   // quicksort the array
 
     auto endConstructing = std::chrono::high_resolution_clock::now();   // track end time of constructing
@@ -124,7 +124,7 @@ void SortedArray:: searchPairs(Pair* pairs, size_t setSize) {
             }
         }
 
-        pairs[i].setAppearances(cnt);
+        pairs[i].apps = cnt;
     }
     
     auto endSearching = std::chrono::high_resolution_clock::now();   // track end time of searching 
