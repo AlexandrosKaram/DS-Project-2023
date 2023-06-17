@@ -5,13 +5,17 @@
 
 // constructor
 Array:: Array() {
-    size = 512;
-    data = new Pair[512];   // create an array of 512 pairs
+    size = 1000000;
+    data = new Pair[1000000];   // create an array of 512 pairs
+    currentSize = 0;
+    constTime = 0;
+    searchTime = 0;
 }
 
 // destructor
 Array:: ~Array() {
     size = 0;
+    currentSize = 0;
     delete []data;   // delete array and set size to 0
 }
 
@@ -35,7 +39,6 @@ void Array:: doubleSize() {
 
 // create the pairs from the text file
 void Array:: createPairs(File formatted, int totalPairs) {
-
     std::ifstream file;
     file.open(formatted.getName());
     
@@ -51,39 +54,15 @@ void Array:: createPairs(File formatted, int totalPairs) {
             file >> word;
             tempPair->word2 = word;
 
-            // check if pair is already in the array 
-            bool alreadyExists = false;
-            for (int i=0 ; i < currentSize && !alreadyExists ; i++) {
-                if (data[i] == *tempPair) {
-                    alreadyExists = true;
-                    data[i].apps++;
-                }
-            }
-            if (!alreadyExists){
-                if (currentSize >= size)
-                    doubleSize();
-                data[++currentSize] = *tempPair;
-            } 
-            
-            delete tempPair;
-            tempPair = new Pair;
-
+            addPair(tempPair);
+            // if (!(currentSize % 10000)) {
+            //     std::cerr << "Current size: " << currentSize << ", data[currentSize-1]: " << data[currentSize-1] << std::endl;
+            // }
             tempPair->word1 = word;   
         }
         file >> word;
         tempPair->word2 = word;
-        bool alreadyExists = false;
-        for (int i=0 ; i<currentSize && !alreadyExists ; i++) {
-            if (data[i] == *tempPair) {
-                alreadyExists = true;
-                data[i].apps++;
-            }
-        }
-        if (!alreadyExists) {
-            if (currentSize >= size)
-                doubleSize();
-            data[currentSize] = *tempPair;
-        }
+        addPair(tempPair);
         delete tempPair;
         
         auto endConstructing = std::chrono::high_resolution_clock::now();   // track end time of constructing
@@ -101,11 +80,9 @@ void Array:: createPairs(File formatted, int totalPairs) {
 }
  
 // search pairs from Q set with linear search
-void Array:: searchPairs(Pair* Qset) {
-    int QsetSize = sizeof(Qset)/sizeof(Qset[0]);   // calculate Qset's size
-
+void Array:: searchPairs(Pair* Qset, int QsetSize) {   // calculate Qset's size
     auto startSearching = std::chrono::high_resolution_clock::now();   // track start time of searching 
-        
+
     for (int i=0 ; i<QsetSize ; i++) {
         for (int j=0 ; j<currentSize ; j++) 
             if (data[j] == Qset[i]) Qset[i].apps = data[j].apps;
@@ -122,5 +99,25 @@ void Array:: searchPairs(Pair* Qset) {
     output << std::endl << "Pairs and their number of appearances:" << std::endl;
     for (int i=0 ; i<QsetSize ; i++) {   
         output << Qset[i] << std::endl;   // print pairs and their appearances
+    }
+
+    delete[] data;
+}
+
+// add pair to data if not already contained
+void Array:: addPair(Pair* tempPair) {
+    bool alreadyExists = false;
+    for (int i=0 ; i<currentSize && !(alreadyExists) ; i++) {
+        if (data[i] == *tempPair) {
+            alreadyExists = true;
+            data[i].apps++;
+        }
+    }
+    if (!alreadyExists) {
+        if (currentSize >= size)
+            doubleSize();
+        data[currentSize] = *tempPair;
+        data[currentSize].apps = 1;
+        currentSize++;
     }
 }

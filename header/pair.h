@@ -3,15 +3,10 @@
 // include libraries
 #include <iostream>
 
-class Pair {
-    public:
+typedef struct Pair {
     std::string word1, word2;
     int apps;
-    // constructor
-    Pair();
-    // destructor
-    ~Pair();
-};
+} Pair;
 
 // overloads
 bool operator==(Pair& p1, Pair& p2);

@@ -26,14 +26,14 @@ int main(int argc, char *argv[]) {
 	std::cout << "Finished counting " << totalPairs << "pairs." << std::endl; 
 
 	int QsetSize;   // size of the Q set
-	Pair* setQ = createSet(formatted, QsetSize);   // create set with the words we need to search in the data structures
+	Pair* Qset = createSet(formatted, QsetSize);   // create set with the words we need to search in the data structures
 	std::cout << "Set created normally" << std::endl;
 
 	Array array;   // create new object of array class
 	// calculate and print results for the array data structure
 	array.createPairs(formatted, totalPairs); 
 	std::cout << "End of pair creation" << std::endl;
-	array.searchPairs(setQ);   
+	array.searchPairs(Qset, QsetSize);   
 	std::cout << "End of pair searching" << std::endl;
 
 	return 0;

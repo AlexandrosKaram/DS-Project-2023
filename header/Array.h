@@ -7,6 +7,8 @@ class Array {
     int size, currentSize;
     Pair* data;
     double constTime, searchTime;
+    // helper functions
+    void addPair(Pair* tempPair);
 
     public:
     // constructor - destructor
@@ -15,5 +17,5 @@ class Array {
     // methods
     void doubleSize();
     void createPairs(File formatted, int totalPairs);
-    void searchPairs(Pair* Qset);
+    void searchPairs(Pair* Qset, int QsetSize);
 };
