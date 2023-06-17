@@ -4,7 +4,7 @@
 #include "../header/Avl.h"
 #include "../header/BinaryTree.h"
 #include "../header/HashTable.h"
-#include "../header/SortedArray.h"
+// #include "../header/SortedArray.h"
 #include "../header/funcs.h"
 #include "../header/Pair.h"
 #include "../header/File.h"
@@ -16,25 +16,25 @@
 #include <string>
 #include <cstdlib>
 
-int main() {
-	formatFile("small-file.txt", "formated.txt");   // custom function that formats the file
-	File formated("formated.txt");   // object of class File
+int main(int argc, char *argv[]) {
+	formatFile(argv[1], "formatted.txt");   // custom function that formats the file
+	std::cout << "File done formatting" << std::endl;
+	File formatted("formatted.txt");   // object of class File
 	// count number of pairs in the file and save it 
-	formated.setPairCount(formated.countPairs());   
-	size_t size = formated.getPairCount();
+	formatted.setPairCount(formatted.countPairs());   
+	int totalPairs = formatted.getPairCount();
+	std::cout << "Finished counting " << totalPairs << "pairs." << std::endl; 
 
-	size_t setSize;   // size of the Q set
-	Pair* setQ = createSet(formated, setSize);   // create set with the words we need to search in the data structures
+	int QsetSize;   // size of the Q set
+	Pair* setQ = createSet(formatted, QsetSize);   // create set with the words we need to search in the data structures
+	std::cout << "Set created normally" << std::endl;
 
-	Array array(size);   // create new object of array class
+	Array array;   // create new object of array class
 	// calculate and print results for the array data structure
-	array.createPairs(formated); 
-	array.searchPairs(setQ, setSize);   
-
-	SortedArray sortedArray(size);   // create new object of SortedArray class
-	// calculate and print results for the sorted array data structure
-	sortedArray.createPairs(formated);
-	sortedArray.searchPairs(setQ, setSize);
+	array.createPairs(formatted, totalPairs); 
+	std::cout << "End of pair creation" << std::endl;
+	array.searchPairs(setQ);   
+	std::cout << "End of pair searching" << std::endl;
 
 	return 0;
 }

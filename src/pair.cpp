@@ -1,7 +1,9 @@
 // include header files
 #include "../header/Pair.h"
 
-Pair:: Pair() {}
+Pair:: Pair() {
+    apps = 0;
+}
 
 Pair:: ~Pair() {}
 

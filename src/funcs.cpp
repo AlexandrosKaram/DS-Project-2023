@@ -35,8 +35,8 @@ void formatFile(std::string inputFilename, std::string outputFilename) {
     outputFile.close();
 }
 
-Pair* createSet(File formated, size_t& setSize) {   // create Q set with random pairs
-    setSize = 1000;   // size of the set
+Pair* createSet(File formated, int& QsetSize) {   // create Q set with random pairs
+    QsetSize = 2000;   // size of the set
 
     std::ifstream f;
     f.open(formated.getName());
@@ -44,10 +44,10 @@ Pair* createSet(File formated, size_t& setSize) {   // create Q set with random 
     f.seekg(0, std::ios::end);
     int end = f.tellg();   
 
-    Pair* pairs = new Pair[setSize];   // create Pair array of size N
+    Pair* pairs = new Pair[QsetSize];   // create Pair array of size N
 
     srand(time(nullptr));
-    for (int i=0 ; i<setSize ; i++) {
+    for (int i=0 ; i<QsetSize ; i++) {
         // get random position within the file
         int pos = rand() % end;  
         f.seekg(pos, std::ios::beg);
