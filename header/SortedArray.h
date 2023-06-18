@@ -6,7 +6,8 @@
 class SortedArray : public Array {
     protected:
     void addPair(Pair* tempPair);
-    void binarySearchPair(Pair* tempPair);
+    int binarySearchPair(Pair* tempPair);
+    void movePairs(int i);
 
     public:
     void createPairs(File formatted);

@@ -3,7 +3,8 @@
 #include <fstream>
 #include "../header/SortedArray.h"
 
-bool SortedArray:: binarySearchPair(Pair* tempPair) {
+// search pair and increase appearances if found
+int SortedArray:: binarySearchPair(Pair* tempPair) {
     int left = 0;
     int right = currentSize-1;
 
@@ -11,17 +12,46 @@ bool SortedArray:: binarySearchPair(Pair* tempPair) {
         int mid = left + (right-left)/2;
 
         if (data[mid] == *tempPair) {
-            data[mid].apps++;
+            return mid;
         } else if (data[mid] < *tempPair) {
             left = mid+1;
         } else {
-            right = mid -1;
+            right = mid-1;
         }
     }
+
+    return -1;
+}
+
+void SortedArray:: movePairs(int i) {
+    if (currentSize >= size+1) doubleSize();
+    for (int j = currentSize+1 ; j<i ; j--) {
+        data[j] = data[j-1];
+    }
+    currentSize++;
 }
 
 void SortedArray:: addPair(Pair* tempPair) {
-
+    int index = binarySearchPair(tempPair);
+    if (index == -1) {
+        bool placed = false;
+        for (int i=0 ; i<currentSize ; i++) {
+            if (*tempPair > data[i]) {
+                movePairs(i);
+                data[i] = *tempPair;
+                data[i].apps = 1;
+                placed = true;
+            } 
+        }
+        if (!(placed)) {
+            if (currentSize >= size) doubleSize();
+            data[currentSize] = *tempPair;
+            data[currentSize].apps = 1;
+            currentSize++;
+        }
+    } else {
+        data[index].apps++;
+    }
 }
 
 void SortedArray:: createPairs(File formatted) {
