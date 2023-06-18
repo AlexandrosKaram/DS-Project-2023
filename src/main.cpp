@@ -25,11 +25,28 @@ int main(int argc, char *argv[]) {
 	int QsetSize;   // size of the Q set
 	Pair* Qset = createSet(formatted, QsetSize);   // create set with the words we need to search in the data structures
 
-	Array array;
-	array.showResults(formatted, Qset, QsetSize);  
+	for (int i=2 ; i<argc ; i++) {
+		std::string ds = argv[i];
+		if (ds == "1") {
+			std::cout << "Started creating the array..." << std::endl;
+			Array* array = new Array();
+			array->showResults(formatted, Qset, QsetSize);  
+			delete array;
+		} else if (ds == "2") {
+			std::cout << "Started creating the sorted array..." << std::endl;
+			SortedArray* sortedArray = new SortedArray();
+			sortedArray->showResults(formatted, Qset, QsetSize);
+			delete sortedArray;
+		} else if (ds == "3") {
+			// bst
+		} else if (ds == "4") {
+			// avl
+		} else if (ds == "5") {
+			// hash
+		}
+	}
+	
 
-	SortedArray sortedArray;
-	sortedArray.showResults(formatted, Qset, QsetSize);
 
 	return 0;
 }

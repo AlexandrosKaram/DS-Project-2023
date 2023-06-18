@@ -23,38 +23,34 @@ int SortedArray:: binarySearchPair(Pair tempPair) {
     return -1;
 }
 
-void SortedArray:: shiftArray(int i) {
-    if (currentSize+1 >= size)
-        doubleSize();
-    for (int j = currentSize ; j>i ; j--) {
-        data[j] = data[j-1];
-    }
-    currentSize++;
-}
+void SortedArray::handlePair(Pair* tempPair) {
+    int left = 0;
+    int right = currentSize - 1;
 
-void SortedArray:: handlePair(Pair* tempPair) {
-    int index = binarySearchPair(*tempPair);
-    if (index == -1) {
-        bool placed = false;
-        for (int i=0 ; i<currentSize && !(placed) ; i++) {
-            if (*tempPair < data[i]) {
-                shiftArray(i);
-                data[i] = *tempPair;
-                data[i].apps = 1;
-                placed = true;
-            } 
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+        if (data[mid] == *tempPair) {
+            data[mid].apps++;
+            return;
+        } else if (data[mid] < *tempPair) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
         }
-        if (!(placed)) {
-            if (currentSize >= size)
-                doubleSize();
-            data[currentSize] = *tempPair;
-            data[currentSize].apps = 1;
-            // std::cout << "data[ " << currentSize << "] = " << data[currentSize] << std::endl; 
-            currentSize++;
-        }
-    } else {
-        data[index].apps++;
     }
+
+    // Shift the elements to the right to make space for insertion
+    if (currentSize >= size)
+        doubleSize();
+    for (int j = currentSize; j > left; j--) {
+        data[j] = data[j - 1];
+    }
+
+    // Insert the pair at the correct position
+    data[left] = *tempPair;
+    data[left].apps = 1;
+    currentSize++;
 }
 
 void SortedArray:: createPairs(File formatted) {

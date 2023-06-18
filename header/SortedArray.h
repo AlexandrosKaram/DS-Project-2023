@@ -9,7 +9,6 @@ class SortedArray : public Array {
     protected:
     void handlePair(Pair* tempPair);
     int binarySearchPair(Pair tempPair);
-    void shiftArray(int i);
 
     public:
     void createPairs(File formatted);

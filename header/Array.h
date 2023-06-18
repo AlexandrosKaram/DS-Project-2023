@@ -10,7 +10,7 @@ class Array {
     Pair* data;
     double constTime, searchTime;
     // helper functions
-    virtual void addPair(Pair* tempPair);
+    virtual void handlePair(Pair* tempPair);
 
     public:
     // constructor - destructor

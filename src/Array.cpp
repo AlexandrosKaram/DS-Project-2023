@@ -53,7 +53,7 @@ void Array:: createPairs(File formatted) {
         while (file) {
             file >> word;
             tempPair->word2 = word;
-            addPair(tempPair);
+            handlePair(tempPair);
             tempPair->word1 = word;   
         }
         delete tempPair;
@@ -98,12 +98,10 @@ void Array:: searchPairs(Pair* Qset, int QsetSize) {   // calculate Qset's size
     for (int i=0 ; i<QsetSize ; i++) {   
         output << Qset[i] << std::endl;   // print pairs and their appearances
     }
-
-    delete[] data;
 }
 
 // add pair to data if not already contained
-void Array:: addPair(Pair* tempPair) {
+void Array:: handlePair(Pair* tempPair) {
     bool alreadyExists = false;
     for (int i=0 ; i<currentSize && !(alreadyExists) ; i++) {
         if (data[i] == *tempPair) {
