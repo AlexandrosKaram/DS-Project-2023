@@ -5,8 +5,8 @@
 
 // constructor
 Array:: Array() {
-    size = 1000000;
-    data = new Pair[1000000];   // create an array of 512 pairs
+    size = 512;
+    data = new Pair[512];   // create an array of 512 pairs
     currentSize = 0;
     constTime = 0;
     searchTime = 0;
@@ -38,7 +38,7 @@ void Array:: doubleSize() {
 }
 
 // create the pairs from the text file
-void Array:: createPairs(File formatted, int totalPairs) {
+void Array:: createPairs(File formatted) {
     std::ifstream file;
     file.open(formatted.getName());
     
@@ -50,19 +50,12 @@ void Array:: createPairs(File formatted, int totalPairs) {
         // start creating the pairs
         file >> word;
         tempPair->word1 = word;
-        while (currentSize < totalPairs-1) {
+        while (file) {
             file >> word;
             tempPair->word2 = word;
-
             addPair(tempPair);
-            // if (!(currentSize % 10000)) {
-            //     std::cerr << "Current size: " << currentSize << ", data[currentSize-1]: " << data[currentSize-1] << std::endl;
-            // }
             tempPair->word1 = word;   
         }
-        file >> word;
-        tempPair->word2 = word;
-        addPair(tempPair);
         delete tempPair;
         
         auto endConstructing = std::chrono::high_resolution_clock::now();   // track end time of constructing

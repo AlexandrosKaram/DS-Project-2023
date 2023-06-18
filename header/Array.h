@@ -16,6 +16,6 @@ class Array {
     ~Array();
     // methods
     void doubleSize();
-    void createPairs(File formatted, int totalPairs);
+    void createPairs(File formatted);
     void searchPairs(Pair* Qset, int QsetSize);
 };
