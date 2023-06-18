@@ -1,25 +1,14 @@
-// # pragma once
+#include <iostream>
+#include "Pair.h"
+#include "File.h"
+#include "Array.h"
 
-// // include header files
-// #include "Array.h"
+class SortedArray : public Array {
+    protected:
+    void addPair(Pair* tempPair);
+    void binarySearchPair(Pair* tempPair);
 
-// // declare SortedArray class
-// class SortedArray: public Array {   // derived class of Array
-//     private:
-//     // helper functions
-//     int partition(Pair* arr, int low, int high);  // Helper function for partition step
-//     void quicksort(Pair* arr, int low, int high);  // Quicksort function
-//     void swapPairs(Pair& a, Pair& b);   // swaps two pairs
-//     int binarySearchPair(Pair& key, int low, int high);   // function to binary search the key
-
-//     public:
-//     // constructors - destructors
-//     SortedArray();   // default constructor
-//     SortedArray(int size);   // constructor
-//     ~SortedArray();   // destructor
-    
-//     // methods
-//     void createPairs(File formated);   // create the pairs
-//     void quicksortArray();  // quicksort the array
-//     void searchPairs(Pair* pairs, size_t setSize);   // search the pairs
-// };
+    public:
+    void createPairs(File formatted);
+    void searchPairs(Pair *Qset, int QsetSize);
+};

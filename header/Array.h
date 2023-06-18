@@ -8,7 +8,7 @@ class Array {
     Pair* data;
     double constTime, searchTime;
     // helper functions
-    void addPair(Pair* tempPair);
+    virtual void addPair(Pair* tempPair);
 
     public:
     // constructor - destructor
@@ -16,6 +16,6 @@ class Array {
     ~Array();
     // methods
     void doubleSize();
-    void createPairs(File formatted);
-    void searchPairs(Pair* Qset, int QsetSize);
+    virtual void createPairs(File formatted);
+    virtual void searchPairs(Pair* Qset, int QsetSize);
 };

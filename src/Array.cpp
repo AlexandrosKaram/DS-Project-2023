@@ -68,7 +68,7 @@ void Array:: createPairs(File formatted) {
         output.open("results/Array.txt", std::ios::out);
         output << "Time to create " << currentSize << " pairs for Array: " << this->constTime << " seconds." << std::endl;
     } else {
-        std::cerr << "Error, file not found." << std::endl;
+        std::cerr << "Error! file not found..." << std::endl;
     }
 }
  

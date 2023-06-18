@@ -4,7 +4,7 @@
 #include "../header/Avl.h"
 #include "../header/BinaryTree.h"
 #include "../header/HashTable.h"
-// #include "../header/SortedArray.h"
+#include "../header/SortedArray.h"
 #include "../header/funcs.h"
 #include "../header/Pair.h"
 #include "../header/File.h"
