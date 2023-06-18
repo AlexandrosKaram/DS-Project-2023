@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include "Pair.h"
 #include "File.h"
@@ -18,4 +20,5 @@ class Array {
     void doubleSize();
     virtual void createPairs(File formatted);
     virtual void searchPairs(Pair* Qset, int QsetSize);
+    void showResults(File formatted, Pair* Qset, int QsetSize);
 };

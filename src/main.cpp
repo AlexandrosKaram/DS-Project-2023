@@ -17,7 +17,7 @@
 #include <cstdlib>
 
 int main(int argc, char *argv[]) {
-	formatFile(argv[2], "formatted.txt");   // custom function that formats the file
+	formatFile(argv[1], "formatted.txt");   // custom function that formats the file
 	File formatted("formatted.txt");   // object of class File
 	// count number of pairs in the file and save it 
 	formatted.setPairCount(formatted.countPairs());   
@@ -25,14 +25,11 @@ int main(int argc, char *argv[]) {
 	int QsetSize;   // size of the Q set
 	Pair* Qset = createSet(formatted, QsetSize);   // create set with the words we need to search in the data structures
 
-	if (argv[1] == "1"){ 
-		Array array;   // create new object of array class
-		// calculate and print results for the array data structure
-		array.createPairs(formatted);
-		array.searchPairs(Qset, QsetSize);   
-	} else if (argv[1] == "2") {
+	// Array array;
+	// array.showResults(formatted, Qset, QsetSize);  
 
-	}
+	SortedArray sortedArray;
+	sortedArray.showResults(formatted, Qset, QsetSize);
 
 	return 0;
 }

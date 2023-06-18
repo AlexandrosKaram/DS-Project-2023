@@ -5,8 +5,8 @@
 
 // constructor
 Array:: Array() {
-    size = 512;
-    data = new Pair[512];   // create an array of 512 pairs
+    size = 262144;
+    data = new Pair[262144];   // create an array of 512 pairs
     currentSize = 0;
     constTime = 0;
     searchTime = 0;
@@ -77,8 +77,11 @@ void Array:: searchPairs(Pair* Qset, int QsetSize) {   // calculate Qset's size
     auto startSearching = std::chrono::high_resolution_clock::now();   // track start time of searching 
 
     for (int i=0 ; i<QsetSize ; i++) {
-        for (int j=0 ; j<currentSize ; j++) 
+        bool found = false;
+        for (int j=0 ; j<currentSize && !(found) ; j++) {
             if (data[j] == Qset[i]) Qset[i].apps = data[j].apps;
+            found = true;
+        } 
     }
 
     auto endSearching = std::chrono::high_resolution_clock::now();   // track end time of searching 
@@ -113,4 +116,9 @@ void Array:: addPair(Pair* tempPair) {
         data[currentSize].apps = 1;
         currentSize++;
     }
+}
+
+void Array:: showResults(File formatted, Pair* Qset, int QsetSize) {
+    createPairs(formatted);
+	searchPairs(Qset, QsetSize); 
 }
