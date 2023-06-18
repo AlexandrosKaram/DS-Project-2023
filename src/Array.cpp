@@ -79,8 +79,10 @@ void Array:: searchPairs(Pair* Qset, int QsetSize) {   // calculate Qset's size
     for (int i=0 ; i<QsetSize ; i++) {
         bool found = false;
         for (int j=0 ; j<currentSize && !(found) ; j++) {
-            if (data[j] == Qset[i]) Qset[i].apps = data[j].apps;
-            found = true;
+            if (data[j] == Qset[i]) {
+                Qset[i].apps = data[j].apps;
+                found = true;   
+            }
         } 
     }
 

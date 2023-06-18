@@ -25,8 +25,8 @@ int main(int argc, char *argv[]) {
 	int QsetSize;   // size of the Q set
 	Pair* Qset = createSet(formatted, QsetSize);   // create set with the words we need to search in the data structures
 
-	// Array array;
-	// array.showResults(formatted, Qset, QsetSize);  
+	Array array;
+	array.showResults(formatted, Qset, QsetSize);  
 
 	SortedArray sortedArray;
 	sortedArray.showResults(formatted, Qset, QsetSize);
