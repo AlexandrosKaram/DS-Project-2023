@@ -65,7 +65,7 @@ void Array:: createPairs(std::string filename) {
         file.close();
 
         std::ofstream output;
-        output.open("results/Array.txt", std::ios::out);
+        output.open("results/Array.txt");
         output << "Time to create " << currentSize << " pairs for Array: " << this->constTime << " seconds." << std::endl;
     } else {
         std::cerr << "Error! file not found..." << std::endl;
@@ -92,7 +92,7 @@ void Array:: searchPairs(Pair* Qset, int QsetSize) {   // calculate Qset's size
 
     std::ofstream output;
     output.open("results/Array.txt", std::ios::app);   // append from previous pointer position
-    output << "Time to search " << QsetSize << " pairs for Array: " << this->searchTime << " seconds." << std::endl;   // print searching time
+    output << "Time to search " << QsetSize << " pairs for Array: " << searchTime << " seconds." << std::endl;   // print searching time
 
     output << std::endl << "Pairs and their number of appearances:" << std::endl;
     for (int i=0 ; i<QsetSize ; i++) {   

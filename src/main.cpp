@@ -34,7 +34,10 @@ int main(int argc, char *argv[]) {
 			sortedArray->showResults("formatted.txt", Qset, QsetSize);
 			delete sortedArray;
 		} else if (ds == "3") {
-			// bst
+			std::cout << "Started creating the BST..." << std::endl;
+			BST* bst = new BST();
+			bst->showResults("formatted.txt", Qset, QsetSize);
+			bst->destroyTree();
 		} else if (ds == "4") {
 			// avl
 		} else if (ds == "5") {
@@ -42,7 +45,5 @@ int main(int argc, char *argv[]) {
 		}
 	}
 	
-
-
 	return 0;
 }

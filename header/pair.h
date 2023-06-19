@@ -3,10 +3,10 @@
 // include libraries
 #include <iostream>
 
-typedef struct Pair {
+struct Pair {
     std::string word1, word2;
     int apps;
-} Pair;
+};
 
 // overloads
 bool operator==(Pair& p1, Pair& p2);
