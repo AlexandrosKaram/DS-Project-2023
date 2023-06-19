@@ -36,8 +36,8 @@ int main(int argc, char *argv[]) {
 		} else if (ds == "3") {
 			std::cout << "Started creating the BST..." << std::endl;
 			BST* bst = new BST();
+			std::cout << "Succesfully initialized the bst." << std::endl;
 			bst->showResults("formatted.txt", Qset, QsetSize);
-			bst->destroyTree();
 		} else if (ds == "4") {
 			// avl
 		} else if (ds == "5") {

@@ -30,7 +30,9 @@ void BST:: insert(Pair value) {
 
 void BST:: insertNode(Node*& node, Pair value) {
     if (node==NULL) {
+        node = new Node;
         node->value = value;
+        node->value.apps = 1;
         node->left = NULL;
         node->right = NULL;
         size++;
@@ -59,8 +61,7 @@ void BST:: createPairs(std::string filename) {
             file >> word;
             tempPair->word2 = word;
             insert(*tempPair);
-            delete tempPair;
-            tempPair = new Pair;
+            tempPair->word1 = word;
         }
         delete tempPair;
 
@@ -112,7 +113,9 @@ void BST:: searchPairs(Pair* Qset, int QsetSize) {
 
 void BST:: showResults(std::string filename, Pair* Qset, int QsetSize) {
     createPairs(filename);
+    std::cout << "pairs created." << std::endl;
     searchPairs(Qset, QsetSize);
+    std::cout << "pairs searched." << std::endl;
     destroyTree(root);
 }
 
