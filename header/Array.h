@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include "Pair.h"
-#include "File.h"
 
 class Array {
     protected:
@@ -18,7 +17,7 @@ class Array {
     ~Array();
     // methods
     void doubleSize();
-    virtual void createPairs(File formatted);
+    virtual void createPairs(std::string filename);
     virtual void searchPairs(Pair* Qset, int QsetSize);
-    void showResults(File formatted, Pair* Qset, int QsetSize);
+    void showResults(std::string filename, Pair* Qset, int QsetSize);
 };

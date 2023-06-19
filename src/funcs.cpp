@@ -36,6 +36,7 @@ void formatFile(std::string inputFilename, std::string outputFilename) {
 }
 
 Pair* createSet(int& QsetSize) {   // create Q set with random pairs
+    srand(time(nullptr));
     QsetSize = rand() % 4000 + 1000;   // random size between 4000 and 5000 
 
     std::ifstream f;

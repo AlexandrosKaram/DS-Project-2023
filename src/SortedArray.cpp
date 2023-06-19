@@ -53,9 +53,9 @@ void SortedArray::handlePair(Pair* tempPair) {
     currentSize++;
 }
 
-void SortedArray:: createPairs(File formatted) {
+void SortedArray:: createPairs(std::string filename) {
     std::ifstream file;
-    file.open(formatted.getName());
+    file.open(filename);
 
     if (file.is_open()) {
         auto startConstructing = std::chrono::high_resolution_clock::now();   // track start time of constructing
@@ -106,6 +106,4 @@ void SortedArray:: searchPairs(Pair *Qset, int QsetSize) {
     for (int i=0 ; i<QsetSize ; i++) {   
         output << Qset[i] << std::endl;   // print pairs and their appearances
     }
-
-    delete[] data;
 }

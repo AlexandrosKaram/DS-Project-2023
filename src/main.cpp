@@ -26,12 +26,12 @@ int main(int argc, char *argv[]) {
 		if (ds == "1") {
 			std::cout << "Started creating the array..." << std::endl;
 			Array* array = new Array();
-			array->showResults(formatted, Qset, QsetSize);  
+			array->showResults("formatted.txt", Qset, QsetSize);  
 			delete array;
 		} else if (ds == "2") {
 			std::cout << "Started creating the sorted array..." << std::endl;
 			SortedArray* sortedArray = new SortedArray();
-			sortedArray->showResults(formatted, Qset, QsetSize);
+			sortedArray->showResults("formatted.txt", Qset, QsetSize);
 			delete sortedArray;
 		} else if (ds == "3") {
 			// bst

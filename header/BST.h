@@ -1,7 +1,6 @@
 # pragma once
 
 #include "Pair.h"
-#include "File.h"
 
 class Node {
     public:
@@ -19,7 +18,7 @@ class BST {
     void insertNode(Node*& node, Pair value);
     void increaseCount(Node* node, Pair value);
     // create and search the pairs
-    void createPairs(File formatted, Pair* Qset, int QsetSize);
+    void createPairs(std::string filename, Pair* Qset, int QsetSize);
     void searchPairs();
 
     public:
@@ -29,5 +28,5 @@ class BST {
     // methods
     void insert(Pair value);
     void search(Pair value);
-    void showResults(File formatted, Pair* Qset, int QsetSize);
+    void showResults(std::string filename, Pair* Qset, int QsetSize);
 };

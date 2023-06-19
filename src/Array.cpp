@@ -38,9 +38,9 @@ void Array:: doubleSize() {
 }
 
 // create the pairs from the text file
-void Array:: createPairs(File formatted) {
+void Array:: createPairs(std::string filename) {
     std::ifstream file;
-    file.open(formatted.getName());
+    file.open(filename);
     
     if (file.is_open()) {
         auto startConstructing = std::chrono::high_resolution_clock::now();   // track start time of constructing
@@ -100,7 +100,7 @@ void Array:: searchPairs(Pair* Qset, int QsetSize) {   // calculate Qset's size
     }
 }
 
-// add pair to data if not already contained
+// add pair to data if not already included
 void Array:: handlePair(Pair* tempPair) {
     bool alreadyExists = false;
     for (int i=0 ; i<currentSize && !(alreadyExists) ; i++) {
@@ -118,7 +118,7 @@ void Array:: handlePair(Pair* tempPair) {
     }
 }
 
-void Array:: showResults(File formatted, Pair* Qset, int QsetSize) {
-    createPairs(formatted);
+void Array:: showResults(std::string filename, Pair* Qset, int QsetSize) {
+    createPairs(filename);
 	searchPairs(Qset, QsetSize); 
 }

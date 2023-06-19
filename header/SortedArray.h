@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include "Pair.h"
-#include "File.h"
 #include "Array.h"
 
 class SortedArray : public Array {
@@ -11,6 +10,6 @@ class SortedArray : public Array {
     int binarySearchPair(Pair tempPair);
 
     public:
-    void createPairs(File formatted);
+    void createPairs(std::string filename);
     void searchPairs(Pair *Qset, int QsetSize);
 };
