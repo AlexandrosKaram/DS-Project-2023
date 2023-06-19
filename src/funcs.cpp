@@ -65,3 +65,21 @@ Pair* createSet(File formated, int& QsetSize) {   // create Q set with random pa
 
     return pairs;
 }
+
+int countPairs(std::string filename) {
+    std::ifstream f;
+    f.open(filename);
+    int cnt = 0;   // pairs counter
+
+    if (f.is_open()) {
+        std::string word;
+        while (f >> word) cnt++;
+        f.close();
+    } else {
+        std::cerr << "Error! Failed to open file..." << std::endl;
+    }
+
+    if (cnt>1)
+        return cnt-1;   // pairs are equal to words-1
+    return cnt;
+}
