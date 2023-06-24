@@ -1,5 +1,12 @@
 // include header files
 #include "../header/funcs.h"
+#include "../header/funcs.h"
+#include "../header/Array.h"
+#include "../header/AVL.h"
+#include "../header/BST.h"
+#include "../header/HashTable.h"
+#include "../header/SortedArray.h"
+#include "../header/funcs.h"
 #include "../header/Pair.h"
 // include libraries
 #include <fstream>
@@ -65,4 +72,34 @@ Pair* createSet(int& QsetSize) {   // create Q set with random pairs
     f.close();
 
     return pairs;
+}
+
+// call data structures
+void array(std::string filename, Pair* Qset, int QsetSize) {
+    std::cout << "Started creating the array..." << std::endl;
+    Array* array = new Array();
+    array->showResults("formatted.txt", Qset, QsetSize);  
+    delete array;
+}
+
+void sortedArray(std::string filename, Pair* Qset, int QsetSize) {
+    std::cout << "Started creating the sorted array..." << std::endl;
+    SortedArray* sortedArray = new SortedArray();
+    sortedArray->showResults("formatted.txt", Qset, QsetSize);
+    delete sortedArray;
+}
+
+void binarySearchTree(std::string filename, Pair* Qset, int QsetSize) {
+    std::cout << "Started creating the BST..." << std::endl;
+    BST* bst = new BST();
+    std::cout << "Succesfully initialized the bst." << std::endl;
+    bst->showResults("formatted.txt", Qset, QsetSize);
+}
+
+void avlTree(std::string filename, Pair* Qset, int QsetSize) {
+
+}
+
+void hashTable(std::string filename, Pair* Qset, int QsetSize) {
+    
 }

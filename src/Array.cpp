@@ -6,7 +6,7 @@
 // constructor
 Array:: Array() {
     size = 262144;
-    data = new Pair[262144];   // create an array of 512 pairs
+    data = new Pair[size];   // create an array of 512 pairs
     currentSize = 0;
     constTime = 0;
     searchTime = 0;

@@ -1,13 +1,6 @@
 //Include header files
 #include "../header/funcs.h"
-#include "../header/Array.h"
-#include "../header/Avl.h"
-#include "../header/BST.h"
-#include "../header/HashTable.h"
-#include "../header/SortedArray.h"
-#include "../header/funcs.h"
 #include "../header/Pair.h"
-#include <time.h>
 
 //Include libraries
 #include <iostream>
@@ -16,32 +9,23 @@
 #include <cstdlib>
 
 int main(int argc, char *argv[]) {
-	formatFile(argv[1], "formatted.txt");   // custom function that formats the file
+	formatFile(argv[1], "formatted.txt");   // format the text file
 	
 	int QsetSize;   // size of the Q set
-	Pair* Qset = createSet(QsetSize);   // create set with the words we need to search in the data structures
+	Pair* Qset = createSet(QsetSize);   // set of random pairs that will be searched in the data structures
 
 	for (int i=2 ; i<argc ; i++) {
 		std::string ds = argv[i];
 		if (ds == "1") {
-			std::cout << "Started creating the array..." << std::endl;
-			Array* array = new Array();
-			array->showResults("formatted.txt", Qset, QsetSize);  
-			delete array;
+			array("formatted.txt", Qset, QsetSize);   // call Array
 		} else if (ds == "2") {
-			std::cout << "Started creating the sorted array..." << std::endl;
-			SortedArray* sortedArray = new SortedArray();
-			sortedArray->showResults("formatted.txt", Qset, QsetSize);
-			delete sortedArray;
+			sortedArray("formatted.txt", Qset, QsetSize);   // call Sorted Array
 		} else if (ds == "3") {
-			std::cout << "Started creating the BST..." << std::endl;
-			BST* bst = new BST();
-			std::cout << "Succesfully initialized the bst." << std::endl;
-			bst->showResults("formatted.txt", Qset, QsetSize);
+			binarySearchTree("formatted.txt", Qset, QsetSize);   // call Binary Search Tree
 		} else if (ds == "4") {
-			// avl
+			avlTree("formatted.txt", Qset, QsetSize);   // call AVL tree
 		} else if (ds == "5") {
-			// hash
+			hashTable("formatted.txt", Qset, QsetSize);   // call Hashtable
 		}
 	}
 	
