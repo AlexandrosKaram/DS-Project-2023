@@ -2,6 +2,8 @@
 #include <chrono>
 #include <fstream>
 
+static int totalCollisions = 0;
+
 HashTable:: HashTable() {
     size = 0;
     capacity = 512;
@@ -84,6 +86,7 @@ void HashTable:: handlePair(Pair tempPair) {
         
             return;
         } else if (data[pos].pair == tempEntry->pair) {
+            totalCollisions++;
             data[pos].pair.apps++;
             
             return;
@@ -108,12 +111,9 @@ void HashTable:: createPairs(std::string filename) {
         // start creating the pairs
         file >> word;
         tempPair->word1 = word;
-        int j = 0;
         while (file) {
-            j++;
-            if (size >= capacity*0.7) {
-                doubleSize();
-            }
+            if (size%100000 == 0) std::cout << "Capacity, Size: " << capacity << ", " << size << std::endl;
+            if (size >= capacity*0.7) doubleSize();
             file >> word;
             tempPair->word2 = word;     
             
@@ -171,6 +171,7 @@ void HashTable:: searchPairs(Pair* Qset, int QsetSize) {
     std::ofstream output;
     output.open("results/HashTable.txt", std::ios::app);   // append from previous pointer position
     output << "Time to search " << QsetSize << " pairs for Hashtable: " << searchTime << " seconds." << std::endl;   // print searching time
+    output << "Fun fact! Total collisions: " << totalCollisions << std::endl;
 
     output << std::endl << "Pairs and their number of appearances:" << std::endl;
     for (int i=0 ; i<QsetSize ; i++) {   

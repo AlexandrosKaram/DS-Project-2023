@@ -15,7 +15,7 @@ class hashEntry {
 class HashTable {
     protected:
     hashEntry* data;
-    int size, capacity;
+    unsigned long long int size, capacity;
     int hashFunction(hashEntry key, int capacity);
     double constTime, searchTime;
     // private helper methods
