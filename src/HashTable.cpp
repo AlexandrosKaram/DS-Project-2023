@@ -61,16 +61,10 @@ unsigned long long int HashTable:: createHashCode(Pair tempPair) {
     unsigned long long int hash = 0;
     int prime = 31;
 
-    std::cout << concat_word << std::endl;
-    for (char c : concat_word) {
-        std::cout << hash << "*" << prime << "+" << int(c) << std::endl;
-        std::cout << "current hashcode: " << hash << std::endl;
+    for (char c : concat_word) {    
         hash = hash * prime + int(c);
     }
     
-    std::cout << "hashcode for " << tempPair << ": " << hash << std::endl;
-    std::cout << "so pos = " << hash%capacity << std::endl;
-
     return hash;
 }
 
@@ -80,20 +74,18 @@ void HashTable:: handlePair(Pair tempPair) {
     tempEntry->hashCode = createHashCode(tempPair);
 
     int pos = hashFunction(*tempEntry, capacity);
-    static int k = 0;
 
     while (true) {
         if (!(data[pos].occupied)){
-            k++;
             data[pos] = *tempEntry;
             data[pos].occupied = true;
             data[pos].pair.apps = 1;
             size++;
-            std::cout << k << "th success. " << data[pos].pair << ", " << pos << std::endl;
+        
             return;
         } else if (data[pos].pair == tempEntry->pair) {
             data[pos].pair.apps++;
-            std::cout << k << "th success. " << data[pos].pair << "apps= " << data[pos].pair.apps << std::endl << std::endl;
+            
             return;
         } else {
             if (pos == capacity-1)
@@ -120,15 +112,11 @@ void HashTable:: createPairs(std::string filename) {
         while (file) {
             j++;
             if (size >= capacity*0.7) {
-                std::cout << "Current size, capacity: " << size << ", " << capacity << std::endl; 
-                std::cout << "Doubling size..." << std::endl;
                 doubleSize();
-                std::cout << "Size doubled. New size, capacity: " << size << ", " << capacity << std::endl;
             }
             file >> word;
             tempPair->word2 = word;     
             
-            std::cout << j << *tempPair << std::endl;
             handlePair(*tempPair);  
             
             delete tempPair;
@@ -156,7 +144,7 @@ void HashTable:: searchPairs(Pair* Qset, int QsetSize) {
     auto startSearching = std::chrono::high_resolution_clock::now();
 
     for (int i=0 ; i<QsetSize ; i++) {
-        int code = createHashCode(Qset[i]);
+        unsigned long long int code = createHashCode(Qset[i]);
         int pos = code % capacity;
 
         bool finished = false;

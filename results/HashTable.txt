@@ -1,5 +1,5 @@
-Time to create 108901 pairs for Binary Search Tree: 1.25922 seconds.
-Time to search 2086 pairs for Binary Search Tree: 0.008958 seconds.
+Time to create 108901 pairs for Hashtable: 0.507246 seconds.
+Time to search 2086 pairs for Hashtable: 0.001001 seconds.
 
 Pairs and their number of appearances:
 [{impressions, of} apps: 1]
