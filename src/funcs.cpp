@@ -101,5 +101,8 @@ void avlTree(std::string filename, Pair* Qset, int QsetSize) {
 }
 
 void hashTable(std::string filename, Pair* Qset, int QsetSize) {
-    
+    std::cout << "Started creating the Hashtable..." << std::endl;
+    HashTable* hashtable = new HashTable();
+    std::cout << "Succesfully initialized the hashtable." << std::endl;
+    hashtable->showResults("formatted.txt", Qset, QsetSize);
 }

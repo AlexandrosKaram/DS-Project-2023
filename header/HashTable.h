@@ -7,7 +7,7 @@ class hashEntry {
     public:
     Pair pair;
     int hashCode;
-    hashEntry() {hashCode = NULL;}
+    hashEntry() {hashCode = -1;}
 };
 
 class HashTable {
