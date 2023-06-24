@@ -1,7 +1,6 @@
 #include "../header/HashTable.h"
 #include <chrono>
 #include <fstream>
-#include <cmath>  
 
 HashTable:: HashTable() {
     size = 0;
@@ -10,12 +9,20 @@ HashTable:: HashTable() {
 }
 
 HashTable:: ~HashTable() {
-    size = 0;
-    capacity = 0;
     delete[] data;
 }
 
-int HashTable:: hashFunction(hashEntry key) {
+int HashTable:: pow(int number, int power) {
+    int result = 1;
+
+    for (int i=0 ; i<power ; i++) {
+        result *= number ;
+    }
+    
+    return result;
+}
+
+int HashTable:: hashFunction(hashEntry key, int capacity) {
     return key.hashCode % capacity;
 }
 
@@ -23,10 +30,23 @@ void HashTable:: doubleSize() {
     int new_capacity = capacity*2;   // double current capacity
     hashEntry* temp = new hashEntry[new_capacity];
 
-    // copy elements
+    // copy and rehash elements
     for (int i=0 ; i<capacity ; i++) {
-        if (data[i].hashCode) {
-            temp[hashFunction(data[i])] = data[i];   // rehash the entries
+        if (data[i].occupied) {
+            int pos = hashFunction(data[i], new_capacity);
+            bool placed = false;
+
+            while (!placed) {    
+                if (!(temp[pos].occupied)) {
+                    temp[pos] = data[i]; 
+                    temp[pos].occupied = true;
+                    placed = true;
+                } else {
+                    pos++;
+                    if (pos == new_capacity)
+                        pos = 0;
+                }
+            }
         }
     }
 
@@ -35,32 +55,45 @@ void HashTable:: doubleSize() {
     capacity = new_capacity;
 }
 
-int HashTable:: createHashCode(Pair tempPair) {
-    int n = tempPair.word1.length() + tempPair.word2.length();
-    int code = 0;
-    for (int i=0 ; i<tempPair.word1.length() ; i++) {
-        code += tempPair.word1[i] * pow(31, n-i);
-    }
-    for (int i=tempPair.word1.length() ; i<n ; i++) {
-        code += tempPair.word2[i] * pow(31, n-i);
-    }
+unsigned long long int HashTable:: createHashCode(Pair tempPair) {
+    std::string concat_word = tempPair.word1 + tempPair.word2;
 
-    return code;
+    unsigned long long int hash = 0;
+    int prime = 31;
+
+    std::cout << concat_word << std::endl;
+    for (char c : concat_word) {
+        std::cout << hash << "*" << prime << "+" << int(c) << std::endl;
+        std::cout << "current hashcode: " << hash << std::endl;
+        hash = hash * prime + int(c);
+    }
+    
+    std::cout << "hashcode for " << tempPair << ": " << hash << std::endl;
+    std::cout << "so pos = " << hash%capacity << std::endl;
+
+    return hash;
 }
 
-void HashTable:: handlePair(Pair* tempPair) {
+void HashTable:: handlePair(Pair tempPair) {
     hashEntry* tempEntry = new hashEntry; 
-    tempEntry->pair = *tempPair;
-    tempEntry->hashCode = createHashCode(*tempPair);
+    tempEntry->pair = tempPair;
+    tempEntry->hashCode = createHashCode(tempPair);
 
-    int pos = hashFunction(*tempEntry);
-    
+    int pos = hashFunction(*tempEntry, capacity);
+    static int k = 0;
+
     while (true) {
-        if (data[pos].hashCode == -1){
+        if (!(data[pos].occupied)){
+            k++;
             data[pos] = *tempEntry;
+            data[pos].occupied = true;
+            data[pos].pair.apps = 1;
+            size++;
+            std::cout << k << "th success. " << data[pos].pair << ", " << pos << std::endl;
             return;
         } else if (data[pos].pair == tempEntry->pair) {
             data[pos].pair.apps++;
+            std::cout << k << "th success. " << data[pos].pair << "apps= " << data[pos].pair.apps << std::endl << std::endl;
             return;
         } else {
             if (pos == capacity-1)
@@ -72,7 +105,7 @@ void HashTable:: handlePair(Pair* tempPair) {
 }
 
 void HashTable:: createPairs(std::string filename) {
-    std::fstream file;
+    std::ifstream file;
     file.open(filename);
 
     if (file.is_open()) {
@@ -83,10 +116,24 @@ void HashTable:: createPairs(std::string filename) {
         // start creating the pairs
         file >> word;
         tempPair->word1 = word;
+        int j = 0;
         while (file) {
+            j++;
+            if (size >= capacity*0.7) {
+                std::cout << "Current size, capacity: " << size << ", " << capacity << std::endl; 
+                std::cout << "Doubling size..." << std::endl;
+                doubleSize();
+                std::cout << "Size doubled. New size, capacity: " << size << ", " << capacity << std::endl;
+            }
             file >> word;
-            tempPair->word2 = word;
-            handlePair(tempPair);
+            tempPair->word2 = word;     
+            
+            std::cout << j << *tempPair << std::endl;
+            handlePair(*tempPair);  
+            
+            delete tempPair;
+            tempPair = new Pair;
+
             tempPair->word1 = word;
         }
         delete tempPair;
@@ -114,7 +161,7 @@ void HashTable:: searchPairs(Pair* Qset, int QsetSize) {
 
         bool finished = false;
         while (!finished) {
-            if (!(data[pos].hashCode)) {
+            if (data[pos].hashCode == -1) {
                 Qset[i].apps = 0;
                 finished = true;
             } else if (data[pos].pair == Qset[i]) {

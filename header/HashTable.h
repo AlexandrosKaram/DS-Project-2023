@@ -6,23 +6,26 @@
 class hashEntry {
     public:
     Pair pair;
-    int hashCode;
-    hashEntry() {hashCode = -1;}
+    unsigned long long int hashCode;
+    bool occupied;
+    // constructor
+    hashEntry() {occupied = false;}
 };
 
 class HashTable {
     protected:
     hashEntry* data;
     int size, capacity;
-    int hashFunction(hashEntry key);
+    int hashFunction(hashEntry key, int capacity);
     double constTime, searchTime;
     // private helper methods
     void createPairs(std::string filename);
     void searchPairs(Pair* Qset, int QsetSize);
     // private methods
     void doubleSize();
-    void handlePair(Pair* tempPair);
-    int createHashCode(Pair tempPair);
+    void handlePair(Pair tempPair);
+    unsigned long long int createHashCode(Pair tempPair);
+    int pow(int number,int power);
 
     public:
     // constructor - destructor
