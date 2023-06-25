@@ -14,12 +14,12 @@ class BST {
     double constTime, searchTime;
     int size;
     // protected methods
-    virtual void insert(Pair value);
+    void insert(Pair value);
     void createPairs(std::string filename);
     void searchPairs(Pair* Qset, int QsetSize);
     // protected helper methods
     void destroyTree(Node* node);
-    void insertNode(Node*& node, Pair value);
+    virtual void insertNode(Node*& node, Pair value);
     int searchValue(Node* node, Pair value);
 
     public:
