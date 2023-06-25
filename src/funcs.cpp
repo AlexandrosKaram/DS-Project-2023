@@ -109,5 +109,5 @@ void hashTable(std::string filename, Pair* Qset, int QsetSize) {
     std::cout << "Succesfully initialized the hashtable." << std::endl;
     hashtable->showResults("formatted.txt", Qset, QsetSize);
     std::cout << "Finished creating and searching the hashtable." << std::endl;
-    // delete hashtable;
+    delete hashtable;
 }

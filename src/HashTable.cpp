@@ -112,8 +112,7 @@ void HashTable:: createPairs(std::string filename) {
         file >> word;
         tempPair->word1 = word;
         while (file) {
-            if (size%100000 == 0) std::cout << "Capacity, Size: " << capacity << ", " << size << std::endl;
-            if (size >= capacity*0.7) doubleSize();
+            if (size >= capacity*0.8) doubleSize();
             file >> word;
             tempPair->word2 = word;     
             
