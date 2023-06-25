@@ -97,7 +97,10 @@ void binarySearchTree(std::string filename, Pair* Qset, int QsetSize) {
 }
 
 void avlTree(std::string filename, Pair* Qset, int QsetSize) {
-
+    std::cout << "Started creating the AVL..." << std::endl;
+    AVL* avl = new AVL();
+    std::cout << "Succesfully initialized the AVL." << std::endl;
+    bst->showResults("formatted.txt", Qset, QsetSize);
 }
 
 void hashTable(std::string filename, Pair* Qset, int QsetSize) {
