@@ -54,7 +54,7 @@ Node* Avl::rotateLeft(Node* node) {
     return newRoot;
 }
 
-Node* Avl::insert(Node* root, int data) {
+Node* Avl::insertNode(Node* root, Pair value) {
     if (root == nullptr) {
         Node* newNode = new Node;
         newNode->data = data;
