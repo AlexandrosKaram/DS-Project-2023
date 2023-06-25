@@ -14,7 +14,7 @@ class BST {
     double constTime, searchTime;
     int size;
     // protected methods
-    void insert(Pair value);
+    virtual void insert(Pair value);
     virtual void createPairs(std::string filename);
     virtual void searchPairs(Pair* Qset, int QsetSize);
     // protected helper methods
