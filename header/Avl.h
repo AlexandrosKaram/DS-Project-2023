@@ -9,5 +9,5 @@ class AVL : public BST {
     bool isBalanced(Node*);
     Node* rotateRight(Node*);
     Node* rotateLeft(Node*);
-    Node* insert(Node*, std::string);
+    Node* insertNode(Node*, std::string);
 };
