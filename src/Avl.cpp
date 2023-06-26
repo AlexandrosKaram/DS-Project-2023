@@ -57,17 +57,17 @@ Node* Avl::rotateLeft(Node* node) {
 Node* Avl::insertNode(Node* root, Pair value) {
     if (root == nullptr) {
         Node* newNode = new Node;
-        newNode->data = data;
+        newNode->value = value;
         newNode->left = nullptr;
         newNode->right = nullptr;
         newNode->height = 0;
         return newNode;
     }
 
-    if (data < root->data) {
-        root->left = insert(root->left, data);
-    } else if (data > root->data) {
-        root->right = insert(root->right, data);
+    if (value < root->value) {
+        root->left = insert(root->left, value);
+    } else if (value > root->value) {
+        root->right = insert(root->right, value);
     } else {
         // Duplicate keys are not allowed in AVL tree
         return root;
@@ -77,20 +77,20 @@ Node* Avl::insertNode(Node* root, Pair value) {
 
     int balance = getBalanceFactor(root);
 
-    if (balance > 1 && data < root->left->data) { // Right rotation
+    if (balance > 1 && value < root->left->value) { // Right rotation
         return rotateRight(root);
     }
 
-    if (balance < -1 && data > root->right->data) { // Left rotation
+    if (balance < -1 && value > root->right->value) { // Left rotation
         return rotateLeft(root);
     }
 
-    if (balance > 1 && data > root->left->data) { // Left Right rotation
+    if (balance > 1 && value > root->left->value) { // Left Right rotation
         root->left = rotateLeft(root->left);
         return rotateRight(root);
     }
 
-    if (balance < -1 && data < root->right->data) { // Right Left rotation
+    if (balance < -1 && value < root->right->value) { // Right Left rotation
         root->right = rotateRight(root->right);
         return rotateLeft(root);
     }
