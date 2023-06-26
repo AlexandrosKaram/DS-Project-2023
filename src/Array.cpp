@@ -1,40 +1,40 @@
 #include "../header/Array.h"
-#include "../header/Pair.h"
 #include <chrono>
+#include <iostream>
 #include <fstream>
 
 // constructor
 Array:: Array() {
-    size = 262144;
-    data = new Pair[size];   // create an array of 512 pairs
-    currentSize = 0;
+    capacity = 262144;
+    data = new Pair[capacity];   // create an array of 512 pairs
+    size = 0;
     constTime = 0;
     searchTime = 0;
 }
 
 // destructor
 Array:: ~Array() {
+    capacity = 0;
     size = 0;
-    currentSize = 0;
-    delete []data;   // delete array and set size to 0
+    delete []data;   // delete array and set capacity to 0
 }
 
 // methods
 
-// double the array's size dynamically
-void Array:: doubleSize() {
-    // create new array with double the current size
-    Pair* temp = new Pair[size*2];
+// double the array's capacity dynamically
+void Array:: doubleCapacity() {
+    // create new array with double the current capacity
+    Pair* temp = new Pair[capacity*2];
 
     // copy all of the current array's pairs
-    for (int i=0 ; i<currentSize ; i++) {
+    for (int i=0 ; i<size ; i++) {
         temp[i] = data[i];
     }
 
     // delete old array and replace it with the new one
     delete []data;
     data = temp;
-    size = 2*size;
+    capacity = 2*capacity;
 }
 
 // create the pairs from the text file
@@ -66,19 +66,19 @@ void Array:: createPairs(std::string filename) {
 
         std::ofstream output;
         output.open("results/Array.txt");
-        output << "Time to create " << currentSize << " pairs for Array: " << this->constTime << " seconds." << std::endl;
+        output << "Time to create " << size << " pairs for Array: " << this->constTime << " seconds." << std::endl;
     } else {
         std::cerr << "Error! file not found..." << std::endl;
     }
 }
  
 // search pairs from Q set with linear search
-void Array:: searchPairs(Pair* Qset, int QsetSize) {   // calculate Qset's size
+void Array:: searchPairs(Pair* Qset, int QsetSize) {   // calculate Qset's capacity
     auto startSearching = std::chrono::high_resolution_clock::now();   // track start time of searching 
 
     for (int i=0 ; i<QsetSize ; i++) {
         bool found = false;
-        for (int j=0 ; j<currentSize && !(found) ; j++) {
+        for (int j=0 ; j<size && !(found) ; j++) {
             if (data[j] == Qset[i]) {
                 Qset[i].apps = data[j].apps;
                 found = true;   
@@ -103,18 +103,18 @@ void Array:: searchPairs(Pair* Qset, int QsetSize) {   // calculate Qset's size
 // add pair to data if not already included
 void Array:: handlePair(Pair* tempPair) {
     bool alreadyExists = false;
-    for (int i=0 ; i<currentSize && !(alreadyExists) ; i++) {
+    for (int i=0 ; i<size && !(alreadyExists) ; i++) {
         if (data[i] == *tempPair) {
             alreadyExists = true;
             data[i].apps++;
         }
     }
     if (!alreadyExists) {
-        if (currentSize >= size)
-            doubleSize();
-        data[currentSize] = *tempPair;
-        data[currentSize].apps = 1;
-        currentSize++;
+        if (size >= capacity)
+            doubleCapacity();
+        data[size] = *tempPair;
+        data[size].apps = 1;
+        size++;
     }
 }
 

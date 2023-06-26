@@ -1,23 +1,23 @@
 #pragma once
 
-#include <iostream>
 #include "Pair.h"
 
 class Array {
     protected:
-    int size, currentSize;
-    Pair* data;
-    double constTime, searchTime;
-    // helper functions
+    // attributes
+    int capacity, size;
+    Pair* data;   // array
+    double constTime, searchTime;   // performance
+    // protected methods
+    void doubleCapacity();
     virtual void handlePair(Pair* tempPair);
+    virtual void createPairs(std::string filename);
+    virtual void searchPairs(Pair* Qset, int QsetSize);
 
     public:
     // constructor - destructor
     Array();
     ~Array();
-    // methods
-    void doubleSize();
-    virtual void createPairs(std::string filename);
-    virtual void searchPairs(Pair* Qset, int QsetSize);
+    // public methods
     void showResults(std::string filename, Pair* Qset, int QsetSize);
 };

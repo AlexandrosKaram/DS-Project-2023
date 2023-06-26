@@ -1,14 +1,15 @@
-//Include header files
+//header files
 #include "../header/funcs.h"
 #include "../header/Pair.h"
 
-//Include libraries
+//libraries
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <cstdlib>
 
-int main(int argc, char *argv[]) {
+// arguments - file to format and numbers from 1 to 5
+int main(int argc, char *argv[]) {   
 	formatFile(argv[1], "formatted.txt");   // format the text file
 	
 	int QsetSize;   // size of the Q set

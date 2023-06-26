@@ -1,20 +1,20 @@
-#include "../header/Avl.h"
+#include "../header/AVL.h"
 
-int Avl::getHeight(Node* node) {
+int AVL::getHeight(Node* node) {
     if (node == nullptr) {
         return -1;
     }
     return node->height;
 }
 
-int Avl::getBalanceFactor(Node* node) {
+int AVL::getBalanceFactor(Node* node) {
     if (node == nullptr) {
         return 0;
     }
     return getHeight(node->left) - getHeight(node->right);
 }
 
-bool Avl::isBalanced(Node* root) {
+bool AVL::isBalanced(Node* root) {
     if (root == nullptr) {
         return true;
     }
@@ -28,33 +28,33 @@ bool Avl::isBalanced(Node* root) {
     return isBalanced(root->left) && isBalanced(root->right);
 }
 
-Node* Avl::rotateRight(Node* node) {
+Node* AVL::rotateRight(Node* node) {
     Node* newRoot = node->left;
     Node* temp = newRoot->right;
 
     newRoot->right = node;
     node->left = temp;
 
-    node->height = max(getHeight(node->left), getHeight(node->right)) + 1;
-    newRoot->height = max(getHeight(newRoot->left), getHeight(newRoot->right)) + 1;
+    node->height = std::max(getHeight(node->left), getHeight(node->right)) + 1;
+    newRoot->height = std::max(getHeight(newRoot->left), getHeight(newRoot->right)) + 1;
 
     return newRoot;
 }
 
-Node* Avl::rotateLeft(Node* node) {
+Node* AVL::rotateLeft(Node* node) {
     Node* newRoot = node->right;
     Node* temp = newRoot->left;
 
     newRoot->left = node;
     node->right = temp;
 
-    node->height = max(getHeight(node->left), getHeight(node->right)) + 1;
-    newRoot->height = max(getHeight(newRoot->left), getHeight(newRoot->right)) + 1;
+    node->height = std::max(getHeight(node->left), getHeight(node->right)) + 1;
+    newRoot->height = std::max(getHeight(newRoot->left), getHeight(newRoot->right)) + 1;
 
     return newRoot;
 }
 
-Node* Avl::insertNode(Node* root, Pair value) {
+Node* AVL::insertNode(Node* root, Pair value) {
     if (root == nullptr) {
         Node* newNode = new Node;
         newNode->value = value;
@@ -73,7 +73,7 @@ Node* Avl::insertNode(Node* root, Pair value) {
         return root;
     }
 
-    root->height = max(getHeight(root->left), getHeight(root->right)) + 1;
+    root->height = std::max(getHeight(root->left), getHeight(root->right)) + 1;
 
     int balance = getBalanceFactor(root);
 

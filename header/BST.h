@@ -6,13 +6,15 @@ struct Node {
     Pair value;
     Node* left;   // left subtree
     Node* right;   // right subtree
+    int height;
 };
 
 class BST {
     protected:
+    // attributes
     Node *root;
-    double constTime, searchTime;
     int size;
+    double constTime, searchTime;   // performance
     // protected methods
     void insert(Pair value);
     void createPairs(std::string filename);

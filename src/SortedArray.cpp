@@ -3,10 +3,10 @@
 #include <fstream>
 #include "../header/SortedArray.h"
 
-// search pair and increase appearances if found
+// binary search function
 int SortedArray:: binarySearchPair(Pair tempPair) {
     int left = 0;
-    int right = currentSize-1;
+    int right = size-1;
 
     while (left <= right) {
         int mid = left + (right-left)/2;
@@ -23,9 +23,10 @@ int SortedArray:: binarySearchPair(Pair tempPair) {
     return -1;
 }
 
+// function to properly place the pair in the array if needed
 void SortedArray::handlePair(Pair* tempPair) {
     int left = 0;
-    int right = currentSize - 1;
+    int right = size - 1;
 
     while (left <= right) {
         int mid = left + (right - left) / 2;
@@ -41,16 +42,16 @@ void SortedArray::handlePair(Pair* tempPair) {
     }
 
     // Shift the elements to the right to make space for insertion
-    if (currentSize >= size)
-        doubleSize();
-    for (int j = currentSize; j > left; j--) {
+    if (size >= capacity)
+        doubleCapacity();
+    for (int j = size; j > left; j--) {
         data[j] = data[j - 1];
     }
 
     // Insert the pair at the correct position
     data[left] = *tempPair;
     data[left].apps = 1;
-    currentSize++;
+    size++;
 }
 
 void SortedArray:: createPairs(std::string filename) {
@@ -80,7 +81,7 @@ void SortedArray:: createPairs(std::string filename) {
         file.close();
         std::ofstream output;
         output.open("results/SortedArray.txt", std::ios::out);
-        output << "Time to create " << currentSize << " pairs for Sorted Array: " << this->constTime << " seconds." << std::endl;
+        output << "Time to create " << size << " pairs for Sorted Array: " << this->constTime << " seconds." << std::endl;
     } else {
         std::cerr << "Error! file not found..." << std::endl;
     }
