@@ -1,6 +1,5 @@
 # pragma once
 
-// include libraries
 #include <iostream>
 
 struct Pair {
@@ -8,11 +7,11 @@ struct Pair {
     int apps;
 };
 
-// overloads
+// bool overloads
 bool operator==(Pair& p1, Pair& p2);
 bool operator>(Pair& p1, Pair& p2);
 bool operator>=(Pair& p1, Pair& p2);
 bool operator<(Pair& p1, Pair& p2);
 bool operator<=(Pair& p1, Pair& p2);
-
+// stream overloads
 std::ostream& operator<<(std::ostream& os, Pair& p);

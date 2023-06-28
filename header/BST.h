@@ -6,7 +6,6 @@ struct Node {
     Pair value;
     Node* left;   // left subtree
     Node* right;   // right subtree
-    int height;
 };
 
 class BST {
@@ -21,7 +20,7 @@ class BST {
     void searchPairs(Pair* Qset, int QsetSize);
     // protected helper methods
     void destroyTree(Node* node);
-    virtual void insertNode(Node*& node, Pair value);
+    void insertNode(Node*& node, Pair value);
     int searchValue(Node* node, Pair value);
 
     public:

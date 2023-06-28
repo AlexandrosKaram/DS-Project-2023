@@ -5,18 +5,20 @@
 
 // constructor
 BST:: BST() {
-    root = NULL;
+    root = nullptr;
     size = 0;
 }
 
 // destructor
 BST:: ~BST() {
-    destroyTree(root);
+    destroyTree();
 }
 
+// recursively destroy the tree
 void BST:: destroyTree(Node* node) {
-    if (node == NULL) 
+    if (!node)   // if node is nullptr then we are done
         return;
+    // destroy left and right subtree if they exist
     if (node->left)
         destroyTree(node->left);
     if (node->right)
@@ -28,13 +30,14 @@ void BST:: insert(Pair value) {
     insertNode(root, value);
 }
 
+// insert node or increase pair's appearances
 void BST:: insertNode(Node*& node, Pair value) {
-    if (node==NULL) {
+    if (!node) {
         node = new Node;
         node->value = value;
         node->value.apps = 1;
-        node->left = NULL;
-        node->right = NULL;
+        node->left = nullptr;
+        node->right = nullptr;
         size++;
     } else if (value == node->value) {
         node->value.apps++;
@@ -45,6 +48,7 @@ void BST:: insertNode(Node*& node, Pair value) {
     }
 }
 
+// store unique pairs in the tree
 void BST:: createPairs(std::string filename) {
     std::ifstream file;
     file.open(filename);
@@ -80,7 +84,7 @@ void BST:: createPairs(std::string filename) {
 }
 
 int BST:: searchValue(Node* node, Pair value) {
-    if (node == NULL)
+    if (!node)
         return -1;
     if (node->value == value)
         return node->value.apps;
@@ -113,10 +117,7 @@ void BST:: searchPairs(Pair* Qset, int QsetSize) {
 
 void BST:: showResults(std::string filename, Pair* Qset, int QsetSize) {
     createPairs(filename);
-    std::cout << "pairs created." << std::endl;
     searchPairs(Qset, QsetSize);
-    std::cout << "pairs searched." << std::endl;
-    destroyTree(root);
 }
 
 void BST:: destroyTree() {

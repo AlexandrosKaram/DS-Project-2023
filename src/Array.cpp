@@ -6,7 +6,7 @@
 // constructor
 Array:: Array() {
     capacity = 262144;
-    data = new Pair[capacity];   // create an array of 512 pairs
+    data = new Pair[capacity]; 
     size = 0;
     constTime = 0;
     searchTime = 0;
@@ -49,14 +49,15 @@ void Array:: createPairs(std::string filename) {
 
         // start creating the pairs
         file >> word;
+        // create temporay pair
         tempPair->word1 = word;
         while (file) {
             file >> word;
             tempPair->word2 = word;
-            handlePair(tempPair);
+            handlePair(tempPair);   // place tempPair in array or increase appearances if it already exists
             tempPair->word1 = word;   
         }
-        delete tempPair;
+        delete tempPair;   // free memory
         
         auto endConstructing = std::chrono::high_resolution_clock::now();   // track end time of constructing
         std::chrono::duration<double> duration = endConstructing - startConstructing;   // calculate duration of constructing
@@ -73,7 +74,7 @@ void Array:: createPairs(std::string filename) {
 }
  
 // search pairs from Q set with linear search
-void Array:: searchPairs(Pair* Qset, int QsetSize) {   // calculate Qset's capacity
+void Array:: searchPairs(Pair* Qset, int QsetSize) {
     auto startSearching = std::chrono::high_resolution_clock::now();   // track start time of searching 
 
     for (int i=0 ; i<QsetSize ; i++) {
@@ -100,7 +101,7 @@ void Array:: searchPairs(Pair* Qset, int QsetSize) {   // calculate Qset's capac
     }
 }
 
-// add pair to data if not already included
+// add pair to data if not already included, otherwise increase appearances
 void Array:: handlePair(Pair* tempPair) {
     bool alreadyExists = false;
     for (int i=0 ; i<size && !(alreadyExists) ; i++) {

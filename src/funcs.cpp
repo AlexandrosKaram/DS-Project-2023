@@ -1,4 +1,4 @@
-// include header files
+// header files
 #include "../header/funcs.h"
 #include "../header/funcs.h"
 #include "../header/Array.h"
@@ -8,11 +8,12 @@
 #include "../header/SortedArray.h"
 #include "../header/funcs.h"
 #include "../header/Pair.h"
-// include libraries
+// libraries
 #include <fstream>
 #include <string>
 #include <cctype>
 #include <time.h>
+
 
 void formatFile(std::string inputFilename, std::string outputFilename) {
     // open input and output files
@@ -42,19 +43,20 @@ void formatFile(std::string inputFilename, std::string outputFilename) {
     outputFile.close();
 }
 
+
 Pair* createSet(int& QsetSize) {   // create Q set with random pairs
     srand(time(nullptr));
-    QsetSize = rand() % 4000 + 1000;   // random size between 4000 and 5000 
+    QsetSize = rand() % 5000 + 5000;   // random size between 5000 and 10000 
 
     std::ifstream f;
     f.open("formatted.txt");
-    // get size of the file by seeing in which byte the pointer is
+    // get size of the file by seeing in which byte the pointer is at the end of the file
     f.seekg(0, std::ios::end);
     int end = f.tellg();   
 
-    Pair* pairs = new Pair[QsetSize];   // create Pair array of size N
+    Pair* pairs = new Pair[QsetSize];   // create Pair array 
 
-    srand(time(nullptr));
+    srand(time(nullptr));   // reset rand seed
     for (int i=0 ; i<QsetSize ; i++) {
         // get random position within the file
         int pos = rand() % end;  
@@ -78,36 +80,44 @@ Pair* createSet(int& QsetSize) {   // create Q set with random pairs
 void array(std::string filename, Pair* Qset, int QsetSize) {
     std::cout << "Started creating the array..." << std::endl;
     Array* array = new Array();
-    array->showResults("formatted.txt", Qset, QsetSize);  
+    array->showResults("formatted.txt", Qset, QsetSize); 
+    std::cout << "Finished creating the array..." << std::endl; 
     delete array;
+    std::cout << "Successfully deleted the array." << std::endl;
 }
 
 void sortedArray(std::string filename, Pair* Qset, int QsetSize) {
     std::cout << "Started creating the sorted array..." << std::endl;
     SortedArray* sortedArray = new SortedArray();
     sortedArray->showResults("formatted.txt", Qset, QsetSize);
+    std::cout << "Finished creating the sorted array..." << std::endl;
     delete sortedArray;
+    std::cout << "Successfully deleted sorted array." << std::endl;
 }
 
 void binarySearchTree(std::string filename, Pair* Qset, int QsetSize) {
     std::cout << "Started creating the BST..." << std::endl;
-    BST* bst = new BST();
-    std::cout << "Succesfully initialized the bst." << std::endl;
+    BST* bst = new BST;
     bst->showResults("formatted.txt", Qset, QsetSize);
+    std::cout << "Finished creating the BST..." << std::endl;
+    delete bst;
+    std::cout << "Successfully deleted the BST." << std::endl;
 }
 
 void avlTree(std::string filename, Pair* Qset, int QsetSize) {
     std::cout << "Started creating the AVL..." << std::endl;
     AVL* avl = new AVL();
-    std::cout << "Succesfully initialized the AVL." << std::endl;
     avl->showResults("formatted.txt", Qset, QsetSize);
+    std::cout << "Finished creating the AVL..." << std::endl;
+    delete avl;
+    std::cout << "Successfully deleted the AVL." << std::endl;
 }
 
 void hashTable(std::string filename, Pair* Qset, int QsetSize) {
     std::cout << "Started creating the Hashtable..." << std::endl;
     HashTable* hashtable = new HashTable();
-    std::cout << "Succesfully initialized the hashtable." << std::endl;
     hashtable->showResults("formatted.txt", Qset, QsetSize);
-    std::cout << "Finished creating and searching the hashtable." << std::endl;
+    std::cout << "Finished creating the Hashtable..." << std::endl;
     delete hashtable;
+    std::cout << "Successfully deleted the Hashtable." << std::endl;
 }

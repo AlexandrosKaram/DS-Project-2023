@@ -87,7 +87,7 @@ void SortedArray:: createPairs(std::string filename) {
     }
 }
 
-void SortedArray:: searchPairs(Pair *Qset, int QsetSize) {
+void SortedArray:: searchPairs(Pair *Qset, int QsetSize) {   // binary search the requested pairs
     auto startSearching = std::chrono::high_resolution_clock::now();   // track start time of searching 
    
     for (int i=0 ; i<QsetSize ; i++) {
