@@ -8,13 +8,15 @@
 #include <string>
 #include <cstdlib>
 
-// arguments - file to format and numbers from 1 to 5
+// arguments (chosen file to format and numbers from 1 to 5)
 int main(int argc, char *argv[]) {   
 	formatFile(argv[1], "formatted.txt");   // format the text file
 	
-	int QsetSize;   // size of the Q set
-	Pair* Qset = createSet(QsetSize);   // set of random pairs that will be searched in the data structures
+	// create Q set with random search to be searched
+	int QsetSize;   
+	Pair* Qset = createSet(QsetSize);   // pass QsetSize by reference to get its value as it will be random
 
+	// each integer from 1-5 represents a data structure
 	for (int i=2 ; i<argc ; i++) {
 		std::string ds = argv[i];
 		if (ds == "1") {
