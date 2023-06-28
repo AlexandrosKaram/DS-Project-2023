@@ -79,45 +79,35 @@ Pair* createSet(int& QsetSize) {   // create Q set with random pairs
 // call data structures
 void array(std::string filename, Pair* Qset, int QsetSize) {
     std::cout << "Started creating the array..." << std::endl;
-    Array* array = new Array();
-    array->showResults("formatted.txt", Qset, QsetSize); 
+    Array array;
+    array.showResults("formatted.txt", Qset, QsetSize); 
     std::cout << "Finished creating the array..." << std::endl; 
-    delete array;
-    std::cout << "Successfully deleted the array." << std::endl;
 }
 
 void sortedArray(std::string filename, Pair* Qset, int QsetSize) {
     std::cout << "Started creating the sorted array..." << std::endl;
-    SortedArray* sortedArray = new SortedArray();
-    sortedArray->showResults("formatted.txt", Qset, QsetSize);
+    SortedArray sortedArray;
+    sortedArray.showResults("formatted.txt", Qset, QsetSize);
     std::cout << "Finished creating the sorted array..." << std::endl;
-    delete sortedArray;
-    std::cout << "Successfully deleted sorted array." << std::endl;
 }
 
 void binarySearchTree(std::string filename, Pair* Qset, int QsetSize) {
     std::cout << "Started creating the BST..." << std::endl;
-    BST* bst = new BST;
-    bst->showResults("formatted.txt", Qset, QsetSize);
+    BST bst;
+    bst.showResults("formatted.txt", Qset, QsetSize);
     std::cout << "Finished creating the BST..." << std::endl;
-    delete bst;
-    std::cout << "Successfully deleted the BST." << std::endl;
 }
 
 void avlTree(std::string filename, Pair* Qset, int QsetSize) {
     std::cout << "Started creating the AVL..." << std::endl;
-    AVL* avl = new AVL();
-    avl->showResults("formatted.txt", Qset, QsetSize);
+    AVL avl;
+    avl.showResults("formatted.txt", Qset, QsetSize);
     std::cout << "Finished creating the AVL..." << std::endl;
-    delete avl;
-    std::cout << "Successfully deleted the AVL." << std::endl;
 }
 
 void hashTable(std::string filename, Pair* Qset, int QsetSize) {
     std::cout << "Started creating the Hashtable..." << std::endl;
-    HashTable* hashtable = new HashTable();
-    hashtable->showResults("formatted.txt", Qset, QsetSize);
+    HashTable hashtable;
+    hashtable.showResults("formatted.txt", Qset, QsetSize);
     std::cout << "Finished creating the Hashtable..." << std::endl;
-    delete hashtable;
-    std::cout << "Successfully deleted the Hashtable." << std::endl;
 }
