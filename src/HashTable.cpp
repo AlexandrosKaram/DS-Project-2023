@@ -2,8 +2,6 @@
 #include <chrono>
 #include <fstream>
 
-static int totalCollisions = 0;
-
 HashTable:: HashTable() {
     size = 0;
     capacity = 512;
@@ -12,16 +10,6 @@ HashTable:: HashTable() {
 
 HashTable:: ~HashTable() {
     delete[] data;
-}
-
-int HashTable:: pow(int number, int power) {
-    int result = 1;
-
-    for (int i=0 ; i<power ; i++) {
-        result *= number ;
-    }
-    
-    return result;
 }
 
 int HashTable:: hashFunction(hashEntry key, int capacity) {
@@ -35,10 +23,10 @@ void HashTable:: doubleSize() {
     // copy and rehash elements
     for (int i=0 ; i<capacity ; i++) {
         if (data[i].occupied) {
-            int pos = hashFunction(data[i], new_capacity);
+            int pos = hashFunction(data[i], new_capacity);   // calculate position with new hash function
             bool placed = false;
 
-            while (!placed) {    
+            while (!placed) {   // loop through the array as pair is not placed 
                 if (!(temp[pos].occupied)) {
                     temp[pos] = data[i]; 
                     temp[pos].occupied = true;
@@ -58,6 +46,7 @@ void HashTable:: doubleSize() {
 }
 
 unsigned long long int HashTable:: createHashCode(Pair tempPair) {
+    // concatenate words to calculate hashcode
     std::string concat_word = tempPair.word1 + tempPair.word2;
 
     unsigned long long int hash = 0;
@@ -70,6 +59,7 @@ unsigned long long int HashTable:: createHashCode(Pair tempPair) {
     return hash;
 }
 
+// handle pair depending on the pair's existance in the array
 void HashTable:: handlePair(Pair tempPair) {
     hashEntry* tempEntry = new hashEntry; 
     tempEntry->pair = tempPair;
@@ -86,7 +76,6 @@ void HashTable:: handlePair(Pair tempPair) {
         
             return;
         } else if (data[pos].pair == tempEntry->pair) {
-            totalCollisions++;
             data[pos].pair.apps++;
             
             return;
@@ -112,15 +101,13 @@ void HashTable:: createPairs(std::string filename) {
         file >> word;
         tempPair->word1 = word;
         while (file) {
-            if (size >= capacity*0.8) doubleSize();
+            // double the capacity every time array is half full to avoid collisions
+            if (size >= capacity*0.5) doubleSize();
             file >> word;
             tempPair->word2 = word;     
             
             handlePair(*tempPair);  
             
-            delete tempPair;
-            tempPair = new Pair;
-
             tempPair->word1 = word;
         }
         delete tempPair;
@@ -146,6 +133,7 @@ void HashTable:: searchPairs(Pair* Qset, int QsetSize) {
         unsigned long long int code = createHashCode(Qset[i]);
         int pos = code % capacity;
 
+        // look for pair until equal pair or empty cell is found
         bool finished = false;
         while (!finished) {
             if (data[pos].hashCode == -1) {
@@ -170,7 +158,6 @@ void HashTable:: searchPairs(Pair* Qset, int QsetSize) {
     std::ofstream output;
     output.open("results/HashTable.txt", std::ios::app);   // append from previous pointer position
     output << "Time to search " << QsetSize << " pairs for Hashtable: " << searchTime << " seconds." << std::endl;   // print searching time
-    output << "Fun fact! Total collisions: " << totalCollisions << std::endl;
 
     output << std::endl << "Pairs and their number of appearances:" << std::endl;
     for (int i=0 ; i<QsetSize ; i++) {   

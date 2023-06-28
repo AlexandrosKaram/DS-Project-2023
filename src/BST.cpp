@@ -94,6 +94,7 @@ int BST:: searchValue(Node* node, Pair value) {
         return searchValue(node->left, value);
 }
 
+// search the pairs using the custom searchValue function
 void BST:: searchPairs(Pair* Qset, int QsetSize) {
     auto startSearching = std::chrono::high_resolution_clock::now();
 
