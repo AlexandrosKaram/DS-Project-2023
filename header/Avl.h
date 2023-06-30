@@ -3,7 +3,7 @@
 #include "BST.h"
 
 class AVL : public BST {
-    public:
+    protected:
     int getHeight(Node*);
     int getBalanceFactor(Node*);
     bool isBalanced(Node*);
