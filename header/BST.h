@@ -15,9 +15,9 @@ class BST {
     int size;
     double constTime, searchTime;   // performance
     // protected methods
-    void insert(Pair value);
-    void createPairs(std::string filename);
-    void searchPairs(Pair* Qset, int QsetSize);
+    virtual void insert(Pair value);
+    virtual void createPairs(std::string filename);
+    virtual void searchPairs(Pair* Qset, int QsetSize);
     // protected helper methods
     void destroyTree(Node* node);
     void insertNode(Node*& node, Pair value);
@@ -28,6 +28,6 @@ class BST {
     BST();
     ~BST();
     // methods
-    void showResults(std::string filename, Pair* Qset, int QsetSize);
+    virtual void showResults(std::string filename, Pair* Qset, int QsetSize);
     void destroyTree();
 };
