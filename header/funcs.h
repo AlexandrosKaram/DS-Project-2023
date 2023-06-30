@@ -12,3 +12,4 @@ void sortedArray(std::string filename, Pair* Qset, int QsetSize);
 void binarySearchTree(std::string filename, Pair* Qset, int QsetSize);
 void avlTree(std::string filename, Pair* Qset, int QsetSize);
 void hashTable(std::string filename, Pair* Qset, int QsetSize);
+int max(int a, int b);

@@ -111,3 +111,7 @@ void hashTable(std::string filename, Pair* Qset, int QsetSize) {
     hashtable.showResults("formatted.txt", Qset, QsetSize);
     std::cout << "Finished creating the Hashtable..." << std::endl;
 }
+
+int max(int a, int b) {
+    return a>b?a:b;
+}
