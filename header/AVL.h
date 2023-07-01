@@ -1,25 +1,26 @@
-# pragma once
+#pragma once
 
+#include "Pair.h"
 #include "BST.h"
 
+struct AVLNode : public Node {
+    int height;   // height of the subtree rooted at this node
+};
+
 class AVL : public BST {
-    public:
-    int getHeight(Node*);
-    int getBalanceFactor(Node*);
-    bool isBalanced(Node*);
-    Node* balance(Node *);
+protected:
+    // override insert method
+    void insert(Pair value) override;
+    // additional helper methods for AVL tree functionality
+    int getHeight(AVLNode* node);
+    int getBalance(AVLNode* node);
+    void updateHeight(AVLNode* node);
+    void rotateLeft(AVLNode*& node);
+    void rotateRight(AVLNode*& node);
+    void balanceTree(AVLNode*& node);
+    void insertNode(AVLNode*& node, Pair value);
 
-    // rotations
-    Node* rotateRight(Node*);
-    Node* rotateLeft(Node*);
-    Node* rightLeftRotate(Node*);
-    Node* leftRightRotate(Node*);
-
-    // inserts
-    Node* insertAvlNode(Node*, Pair value);
-    void insert(Pair value);
-
-    void createPairs(std::string filename);
-    void searchPairs(Pair* Qset, int QsetSize);
-    void showResults(std::string filename, Pair* Qset, int QsetSize);
+public:
+    // override showResults method
+    void showResults(std::string filename, Pair* Qset, int QsetSize) override;
 };

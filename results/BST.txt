@@ -1,5 +1,5 @@
-Time to create 108901 pairs for AVL Tree: 1.20361 seconds.
-Time to search 7766 pairs for AVL Tree: 0.027356 seconds.
+Time to create 108901 pairs for Binary Search Tree: 1.20361 seconds.
+Time to search 7766 pairs for Binary Search Tree: 0.027356 seconds.
 
 Pairs and their number of appearances:
 [{confuse, the} apps: 1]
