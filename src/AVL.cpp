@@ -36,34 +36,59 @@ bool AVL::isBalanced(Node* node) {
 }
 
 Node* AVL::rotateRight(Node* node) {
-    //std::cout<<"rotateRight"<<std::endl;
-
-    Node* newRoot = node->left;
-    node->left = newRoot->right;
-    newRoot->right = node;
-    return newRoot;
+    //std::cout<<"Rotate Right"<<std::endl;
+    Node *t;
+    t = node->right;
+    node->right = t->left;
+    t->left = node;
+    return t;
 }
 
 Node* AVL::rotateLeft(Node* node) {
-    //std::cout<<"rotateLeft"<<std::endl;
-
-    Node* newRoot = node->right;
-    node->right = newRoot->left;
-    newRoot->left = node;
-    return newRoot;
+    //std::cout<<"Rotate Left"<<std::endl;
+    Node *t;
+    t = node->left;
+    node->left = t->right;
+    t->right = node;
+    return t;
 }
 
 Node* AVL:: leftRightRotate(Node* node) {
-    node->left = rotateLeft(node->left);
-    return rotateRight(node);
-}
-
-Node* AVL:: rightLeftRotate(Node* node) {
-    node->right = rotateRight(node->right);
+    //std::cout<<"Rotate Left Right"<<std::endl;
+    Node *t;
+    t = node->left;
+    node->left = rotateRight(t);
     return rotateLeft(node);
 }
 
-void AVL::insertAvlNode(Node*& node, Pair value) {
+Node* AVL:: rightLeftRotate(Node* node) {
+    //std::cout<<"Rotate Right Left"<<std::endl;
+    Node *t;
+    t = node->right;
+    node->right = rotateLeft(t);
+    return rotateRight(node);
+}
+
+Node* AVL::balance(Node* node) {
+    //std::cout<<"Balance"<<std::endl;
+    int heightDiff = getBalanceFactor(node);
+    if (heightDiff > 1) {
+        if (getBalanceFactor(node->left) > 0) {
+            node = rotateLeft(node);
+        } else {
+            node = leftRightRotate(node);
+        }
+    } else if (heightDiff < -1) {
+        if (getBalanceFactor(node->right) > 0) {
+            node = rightLeftRotate(node);
+        } else {
+            node = rotateRight(node);
+        }
+    }
+    return node;
+}
+
+Node* AVL::insertAvlNode(Node* node, Pair value) {
     //std::cout<<"insertAvlNode"<<std::endl;
     if (!node) {
         node = new Node;
@@ -72,79 +97,39 @@ void AVL::insertAvlNode(Node*& node, Pair value) {
         node->left = nullptr;
         node->right = nullptr;
         size++;
+        return node;
     } else if (value == node->value) {
         node->value.apps++;
     } else if (value > node->value) {
-        insertAvlNode(node->right, value);
+        node->right = insertAvlNode(node->right, value);
+        node = balance(node);
     } else {
-        insertAvlNode(node->left, value);
+        node->left = insertAvlNode(node->left, value);
+        node = balance(node);
     }
 
-    //std::cout<<"AA"<<std::endl;
-    //root->height = std::max(getHeight(root->left), getHeight(root->right)) + 1;
-
-    int balance = getBalanceFactor(node);
-    ////std::cout<<"BB"<<std::endl;
-
-    if (balance > 1 && node->left && value < node->left->value) { // Right rotation
-        //std::cout<<"Right"<<std::endl;
-        Node* newRoot = rotateRight(node);
-
-        //root->right = rotateRight(root->right);
-        //std::cout<<"endRight"<<std::endl;
-    }
-
-    //std::cout<<"E1"<<std::endl;
-
-    if (balance < -1 && node->right && value > node->right->value) { // Left rotation
-    //std::cout<<"Left"<<std::endl;
-        Node* newRoot = rotateLeft(node);
-        //std::cout<<"endLeft"<<std::endl;
-    }
-
-    //std::cout<<"E2"<<std::endl;
-
-    if (balance > 1 && node->left && value > node->left->value) { // Left Right rotation
-    //std::cout<<"START LF"<<std::endl;
-        node->left = rotateLeft(node->left);
-        rotateRight(node);
-    //std::cout<<"END LF"<<std::endl;
-    }
-
-    //std::cout<<"E3"<<std::endl;
-    //std::cout<<value<<std::endl;
-
-    if (balance < -1 && node->right && value < node->right->value) { // Right Left rotation
-    //std::cout<<"START RL"<<std::endl;
-        node->right = rotateRight(node->right);
-        rotateLeft(node);
-        //std::cout<<"END RL"<<std::endl;
-    }
-
-    //std::cout<<"CC"<<std::endl;
-
-    //return node;
+    return node;
 }
 
 void AVL:: insert(Pair value) {
-    ////std::cout<<"insert"<<std::endl;
-    insertAvlNode(root, value);
+    //std::cout<<"insert"<<std::endl;
+    root = insertAvlNode(root, value);
 }
 
 
 // store unique pairs in the tree
 void AVL:: createPairs(std::string filename) {
-    std::cout<<"start create"<<std::endl;
+     std::cout<<"start create"<<std::endl;
     ////std::cout<<"createPairs"<<std::endl;
     std::ifstream file;
     file.open(filename);
 
     if (file.is_open()) {
-        //std::cout<<"A1"<<std::endl;
+        
         auto startConstructing = std::chrono::high_resolution_clock::now();
         std::string word;
         Pair *tempPair = new Pair;
-        //std::cout<<"B1"<<std::endl;
+        
 
         // start creating the pairs
         file >> word;
@@ -156,7 +141,7 @@ void AVL:: createPairs(std::string filename) {
             tempPair->word1 = word;
         }
         delete tempPair;
-        //std::cout<<"C1"<<std::endl;
+        
 
         auto endConstructing = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> duration = endConstructing - startConstructing;
@@ -175,17 +160,12 @@ void AVL:: createPairs(std::string filename) {
 
 // search the pairs using the custom searchValue function
 void AVL:: searchPairs(Pair* Qset, int QsetSize) {
-    ////std::cout<<"searchPairs"<<std::endl;
     std::cout<<"start search"<<std::endl;
-    auto startSearching = std::chrono::high_resolution_clock::now();\
-
-    //std::cout<<"A2"<<std::endl;
+    auto startSearching = std::chrono::high_resolution_clock::now(); 
 
     for (int i=0 ; i<QsetSize ; i++) {
         Qset[i].apps = searchValue(root, Qset[i]);
     }
-
-    //std::cout<<"B2"<<std::endl;
 
     auto endSearching = std::chrono::high_resolution_clock::now();
     std::chrono::duration <double> duration = endSearching - startSearching;
@@ -203,7 +183,6 @@ void AVL:: searchPairs(Pair* Qset, int QsetSize) {
 }
 
 void AVL:: showResults(std::string filename, Pair* Qset, int QsetSize) {
-    //std::cout<<"showResults"<<std::endl;
     createPairs(filename);
     searchPairs(Qset, QsetSize);
 }

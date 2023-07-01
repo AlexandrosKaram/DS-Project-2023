@@ -7,6 +7,7 @@ class AVL : public BST {
     int getHeight(Node*);
     int getBalanceFactor(Node*);
     bool isBalanced(Node*);
+    Node* balance(Node *);
 
     // rotations
     Node* rotateRight(Node*);
@@ -15,7 +16,7 @@ class AVL : public BST {
     Node* leftRightRotate(Node*);
 
     // inserts
-    void insertAvlNode(Node*&, Pair value);
+    Node* insertAvlNode(Node*, Pair value);
     void insert(Pair value);
 
     void createPairs(std::string filename);
