@@ -134,7 +134,7 @@ void AVL:: insert(Pair value) {
 
 // store unique pairs in the tree
 void AVL:: createPairs(std::string filename) {
-     std::cout<<"start create"<<std::endl;
+    std::cout<<"start create"<<std::endl;
     ////std::cout<<"createPairs"<<std::endl;
     std::ifstream file;
     file.open(filename);
